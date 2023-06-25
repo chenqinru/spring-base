@@ -1,0 +1,52 @@
+server:
+  # 服务器端口号
+  port: 9000
+  servlet:
+    context-path: /api
+spring:
+  #由于Spring Boot 2.6.x 请求路径与 Spring MVC 处理映射匹配的默认策略从AntPathMatcher更改为PathPatternParser。所以需要设置spring.mvc.pathmatch.matching-strategy为ant-path-matcher来改变它。
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    # 选择环境
+    active: @activatedProperties@
+  # 配置数据库连接池
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # 最小连接
+      minimum-idle: 5
+      # 最大连接
+      maximum-pool-size: 15
+      # 自动提交
+      auto-commit: true
+      # 最大空闲时间
+      idle-timeout: 30000
+      # 连接池名称
+      pool-name: DatebookHikariCP
+      # 最大生命周期
+      max-lifetime: 900000
+      # 连接超时时间
+      connection-timeout: 15000
+      # 心跳检测
+      connection-test-query: select 1
+  # 配置Redis
+  redis:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+
+# mybatis_plus
+mybatis-plus:
+  # xml路径
+  mapper-locations: classpath:mapping/*Mapper.xml
+
+# knife4j
+knife4j:
+  enable: true
+
