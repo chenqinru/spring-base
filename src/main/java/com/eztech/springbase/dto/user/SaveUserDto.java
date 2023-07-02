@@ -21,7 +21,7 @@ import java.util.Date;
  * @author CQR
  */
 @Data
-@ApiModel("添加用户需要的表单数据")
+@ApiModel("用户写入需要的表单数据")
 @EqualsAndHashCode(callSuper = false)
 public class SaveUserDto extends BaseDto<User> {
 

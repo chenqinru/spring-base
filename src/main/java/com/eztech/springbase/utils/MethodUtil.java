@@ -14,6 +14,11 @@ public class MethodUtil {
     private MethodUtil() {
     }
 
+    /**
+     * 获取文件行号信息
+     *
+     * @return {@link String}
+     */
     public static String getLineInfo() {
         StackTraceElement ste = new Throwable().getStackTrace()[1];
         return ste.getFileName() + " -> " + ste.getLineNumber() + "行";

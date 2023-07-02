@@ -14,9 +14,9 @@ import org.springframework.beans.BeanUtils;
  * @author CQR
  */
 @Data
-@ApiModel("获取用户列表需要的表单数据")
+@ApiModel("获取用户列表需要的query数据")
 @EqualsAndHashCode(callSuper = false)
-public class ListUserDto extends PageDto<ListUserDto> {
+public class ListUserDto extends PageDto<User> {
 
     /**
      * 用户状态
@@ -37,6 +37,7 @@ public class ListUserDto extends PageDto<ListUserDto> {
      *
      * @return 实体对象
      */
+    @Override
     public User buildEntity() {
         User user = new User();
         BeanUtils.copyProperties(this, user);

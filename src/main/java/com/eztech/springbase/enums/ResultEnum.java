@@ -62,10 +62,16 @@ public enum ResultEnum {
     /**
      * 请求方式不支持
      */
-    REQ_METHOD_NOT_SUPPORT(110,"请求方式不支持");
+    REQ_METHOD_NOT_SUPPORT(110, "请求方式不支持");
 
+    /**
+     * 代码
+     */
     private final Integer code;
 
+    /**
+     * 信息
+     */
     private final String msg;
 
     ResultEnum(Integer code, String msg) {
@@ -75,12 +81,13 @@ public enum ResultEnum {
 
     /**
      * 通过状态码获取枚举对象
+     *
      * @param code 状态码
      * @return 枚举对象
      */
-    public static ResultEnum getByCode(int code){
+    public static ResultEnum getByCode(int code) {
         for (ResultEnum resultEnum : ResultEnum.values()) {
-            if(code == resultEnum.getCode()){
+            if (code == resultEnum.getCode()) {
                 return resultEnum;
             }
         }

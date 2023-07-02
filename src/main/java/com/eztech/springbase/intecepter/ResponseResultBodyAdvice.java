@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.util.Arrays;
+
 /**
  * API接口统一JSON格式返回
  *
@@ -26,6 +28,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  */
 @RestControllerAdvice
 public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
+
+    /**
+     * 排除
+     */
+    private static final String[] EXCLUDE = {
+            "Swagger2Controller",
+            "Swagger2ControllerWebMvc",
+            "ApiResourceController"
+    };
 
     /**
      * 判断Controller方法返回值是否支持
@@ -54,6 +65,10 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
         if (body instanceof ResultVo) {
             return body;
         }
+        // 避免swagger，Knife4j失效
+        if(Arrays.asList(EXCLUDE).contains(returnType.getDeclaringClass().getSimpleName())){
+            return body;
+        }
         // String类型不能直接包装，所以要进行些特别的处理
         if (returnType.getGenericParameterType().equals(String.class)) {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -64,6 +79,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
                 throw new CustomException(ResultEnum.FAIL, MethodUtil.getLineInfo());
             }
         }
+
         return ResultVoUtil.ok(body);
     }
 }

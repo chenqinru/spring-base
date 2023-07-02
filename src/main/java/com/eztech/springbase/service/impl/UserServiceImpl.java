@@ -1,6 +1,7 @@
 package com.eztech.springbase.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eztech.springbase.dto.user.ListUserDto;
 import com.eztech.springbase.entity.User;
@@ -9,7 +10,11 @@ import com.eztech.springbase.service.IUserService;
 import com.eztech.springbase.vo.PageVo;
 import com.eztech.springbase.vo.user.UserVo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author CQR
@@ -17,52 +22,19 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-
-    private UserMapper userMapper;
-//
-//    /**
-//     * 添加用户
-//     * @param userDto 表单数据
-//     * @return true 或者 false
-//     */
-//    @Override
-//    public boolean addUser(AddUserDto userDto) {
-//        return save(userDto.buildEntity());
-//    }
-//
-    /**
-     * 获取用户列表
-     * @param listUserDto 表单数据
-     * @return 用户列表
-     */
     @Override
-    public PageVo<UserVo> listUser(ListUserDto listUserDto) {
-        PageVo<UserVo> pageVo = new PageVo<UserVo>().setCurrentAndSize(listUserDto);
-        pageVo.setTotal(countUser(listUserDto.getStatus()));
-        pageVo.setRecords(userMapper.listUser(listUserDto.calcCurrent()));
+    public PageVo<UserVo> list(ListUserDto listUserDto) {
+        //封装查询对象
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(listUserDto.buildEntity());
+        queryWrapper.orderBy(true, listUserDto.getIsAsc(), listUserDto.getColumn());
+        //分页查询
+        Page<User> page = page(new Page<>(listUserDto.getCurrent(), listUserDto.getSize()), queryWrapper);
+        List<UserVo> list = page.getRecords().stream().map(user -> user.buildVo(new UserVo())).collect(Collectors.toList());
+        //封装返回体
+        PageVo<UserVo> pageVo = new PageVo<>();
+        BeanUtils.copyProperties(page, pageVo);
+        pageVo.setRecords(list);
+
         return pageVo;
     }
-//
-//    /**
-//     * 删除用户
-//     * @param id id
-//     */
-//    @Override
-//    public void deleteUser(String id) {
-//        // 如果删除失败抛出异常。 -- 演示而已不推荐这样干
-//        if(!removeById(id)){
-//            throw new CustomException(ResultEnum.DELETE_ERROR, MethodUtil.getLineInfo());
-//        }
-//    }
-//
-    /**
-     * 获取用户数量
-     *
-     * @param status 状态
-     * @return 用户数量
-     */
-    private long countUser(String status){
-        return count(new QueryWrapper<User>().eq("status",status));
-    }
-
 }
