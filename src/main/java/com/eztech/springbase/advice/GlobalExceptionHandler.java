@@ -1,6 +1,7 @@
-package com.eztech.springbase.exception;
+package com.eztech.springbase.advice;
 
 import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.utils.ResultVoUtil;
 import com.eztech.springbase.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;

@@ -1,0 +1,27 @@
+2023-07-02 15:12:16.587 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) AS total FROM user
+2023-07-02 15:12:16.596 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==> Parameters: 
+2023-07-02 15:12:16.616 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - <==      Total: 1
+2023-07-02 15:12:16.619 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user ORDER BY id DESC LIMIT ?
+2023-07-02 15:12:16.620 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==> Parameters: 10(Long)
+2023-07-02 15:12:16.627 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - <==      Total: 1
+2023-07-02 15:24:50.685 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) AS total FROM user
+2023-07-02 15:24:50.687 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==> Parameters: 
+2023-07-02 15:24:50.703 [http-nio-9000-exec-7] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - <==      Total: 1
+2023-07-02 15:24:50.704 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user ORDER BY id DESC LIMIT ?
+2023-07-02 15:24:50.706 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==> Parameters: 10(Long)
+2023-07-02 15:24:50.712 [http-nio-9000-exec-7] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - <==      Total: 1
+2023-07-02 23:08:59.393 [http-nio-9000-exec-9] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) AS total FROM user
+2023-07-02 23:08:59.402 [http-nio-9000-exec-9] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - ==> Parameters: 
+2023-07-02 23:08:59.418 [http-nio-9000-exec-9] DEBUG c.e.s.mapper.UserMapper.selectPage_mpCount - <==      Total: 1
+2023-07-02 23:08:59.422 [http-nio-9000-exec-9] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user ORDER BY id DESC LIMIT ?
+2023-07-02 23:08:59.423 [http-nio-9000-exec-9] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - ==> Parameters: 10(Long)
+2023-07-02 23:08:59.428 [http-nio-9000-exec-9] DEBUG com.eztech.springbase.mapper.UserMapper.selectPage - <==      Total: 1
+2023-07-02 23:12:18.272 [http-nio-9000-exec-5] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user WHERE id=?
+2023-07-02 23:12:18.281 [http-nio-9000-exec-5] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==> Parameters: 1(Integer)
+2023-07-02 23:12:18.300 [http-nio-9000-exec-5] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - <==      Total: 1
+2023-07-02 23:25:50.047 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user WHERE id=?
+2023-07-02 23:25:50.057 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==> Parameters: 1(Integer)
+2023-07-02 23:25:50.071 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - <==      Total: 1
+2023-07-02 23:26:28.232 [http-nio-9000-exec-2] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user WHERE id=?
+2023-07-02 23:26:28.233 [http-nio-9000-exec-2] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==> Parameters: 1(Integer)
+2023-07-02 23:26:28.241 [http-nio-9000-exec-2] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - <==      Total: 1

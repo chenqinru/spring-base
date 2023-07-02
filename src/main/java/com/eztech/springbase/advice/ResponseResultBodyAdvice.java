@@ -1,4 +1,4 @@
-package com.eztech.springbase.intecepter;
+package com.eztech.springbase.advice;
 
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;

@@ -1,6 +1,8 @@
 package com.eztech.springbase.config;
 
+import com.eztech.springbase.intecepter.LogInterceptor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -13,13 +15,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
+    @Bean
+    public LogInterceptor logInterceptor() {
+        return new LogInterceptor();
+    }
 
     //实现拦截器 要拦截的路径以及不拦截的路径
     @Override
     public void addInterceptors(@NotNull InterceptorRegistry registry) {
-
         //注册自定义拦截器，添加拦截路径和排除拦截路径
-//        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
+        //registry.addInterceptor(logInterceptor()).addPathPatterns("/**");
+        //registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
     }
 
     @Override

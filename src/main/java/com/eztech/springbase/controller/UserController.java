@@ -1,5 +1,6 @@
 package com.eztech.springbase.controller;
 
+import com.eztech.springbase.annotation.OperationLogging;
 import com.eztech.springbase.dto.user.ListUserDto;
 import com.eztech.springbase.dto.user.SaveUserDto;
 import com.eztech.springbase.enums.ResultEnum;
@@ -41,6 +42,7 @@ public class UserController {
      */
     @GetMapping("/list")
     @ApiOperation("用户列表")
+    @OperationLogging
     public PageVo<UserVo> list(ListUserDto listUserDto) {
         return userService.list(listUserDto);
     }
@@ -68,6 +70,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ApiOperation("用户详情")
+    @OperationLogging
     public UserVo read(@PathVariable Integer id) throws CustomException {
         return Optional.ofNullable(userService.getById(id)).orElseThrow(() -> new CustomException(ResultEnum.GET_ERROR, MethodUtil.getLineInfo())).buildVo(new UserVo());
     }

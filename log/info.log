@@ -1,0 +1,23 @@
+2023-07-03 00:00:06.848 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-03 00:00:06.850 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 28525 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-03 00:00:06.851 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-03 00:00:06.877 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 00:00:06.877 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 00:00:07.718 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-03 00:00:07.723 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-03 00:00:07.723 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 00:00:07.723 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-03 00:00:07.757 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-03 00:00:07.757 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 880 ms
+2023-07-03 00:00:08.276 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 00:00:08.438 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9000"]
+2023-07-03 00:00:08.451 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9000 (http) with context path '/api'
+2023-07-03 00:00:08.580 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Started SpringBaseApplication in 2.059 seconds (JVM running for 2.457)
+2023-07-03 00:00:14.809 [http-nio-9000-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 00:00:14.809 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 00:00:14.812 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2023-07-03 00:00:14.859 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
+2023-07-03 00:00:14.989 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
+2023-07-03 00:00:15.109 [http-nio-9000-exec-1] INFO  com.eztech.springbase.aop.OperationLogAspect - {"account":"admin","description":"","duration":263,"func":"read","ip":"0:0:0:0:0:0:0:1","method":"GET","nickname":"admin","params":"[1]","path":"/api/user/1","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}"}
+2023-07-03 00:06:07.399 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
+2023-07-03 00:06:07.403 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.

@@ -1,0 +1,117 @@
+2023-07-02 15:49:15.057 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
+2023-07-02 15:49:15.059 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
+2023-07-02 23:05:45.807 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:05:45.808 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 27804 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:05:45.808 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:05:45.830 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:05:45.831 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:05:46.687 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:05:46.692 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:05:46.692 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:05:46.692 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:05:46.724 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:05:46.725 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 894 ms
+2023-07-02 23:05:47.125 [restartedMain] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-07-02 23:05:47.131 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-07-02 23:06:56.317 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:06:56.319 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 27848 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:06:56.319 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:06:56.341 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:06:56.341 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:06:57.180 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:06:57.184 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:06:57.185 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:06:57.185 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:06:57.218 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:06:57.218 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 877 ms
+2023-07-02 23:06:57.623 [restartedMain] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-07-02 23:06:57.629 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-07-02 23:08:35.890 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:08:35.891 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 27876 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:08:35.891 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:08:35.916 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:08:35.916 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:08:36.719 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:08:36.724 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:08:36.724 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:08:36.724 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:08:36.755 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:08:36.755 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 839 ms
+2023-07-02 23:08:37.231 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-02 23:08:37.380 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:08:37.389 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9000 (http) with context path '/api'
+2023-07-02 23:08:37.507 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Started SpringBaseApplication in 1.875 seconds (JVM running for 2.202)
+2023-07-02 23:08:48.610 [http-nio-9000-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-02 23:08:48.610 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-02 23:08:48.612 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2023-07-02 23:08:59.275 [http-nio-9000-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
+2023-07-02 23:08:59.389 [http-nio-9000-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
+2023-07-02 23:08:59.589 [http-nio-9000-exec-9] INFO  com.eztech.springbase.aop.OperationLogAspect - {"description":"","duration":385,"ip":"0:0:0:0:0:0:0:1","method":"list","params":"[{\"column\":\"id\",\"current\":1,\"isAsc\":false,\"size\":10}]","result":"{\"pages\":1,\"records\":[{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}],\"total\":1}","time":1688310539200}
+2023-07-02 23:11:48.554 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
+2023-07-02 23:11:48.559 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
+2023-07-02 23:11:51.176 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:11:51.178 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 27932 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:11:51.178 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:11:51.200 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:11:51.200 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:11:51.945 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:11:51.949 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:11:51.949 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:11:51.949 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:11:51.977 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:11:51.977 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 777 ms
+2023-07-02 23:11:52.436 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-02 23:11:52.579 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:11:52.589 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9000 (http) with context path '/api'
+2023-07-02 23:11:52.709 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Started SpringBaseApplication in 1.785 seconds (JVM running for 2.111)
+2023-07-02 23:11:54.107 [http-nio-9000-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-02 23:11:54.107 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-02 23:11:54.108 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-07-02 23:12:18.144 [http-nio-9000-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
+2023-07-02 23:12:18.267 [http-nio-9000-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
+2023-07-02 23:12:18.375 [http-nio-9000-exec-5] INFO  com.eztech.springbase.aop.OperationLogAspect - {"description":"","duration":245,"ip":"0:0:0:0:0:0:0:1","method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688310738124}
+2023-07-02 23:25:38.412 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
+2023-07-02 23:25:38.418 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
+2023-07-02 23:25:42.896 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:25:42.897 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 28082 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:25:42.897 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:25:42.921 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:25:42.922 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:25:43.789 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:25:43.793 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:25:43.794 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:25:43.794 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:25:43.824 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:25:43.824 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 902 ms
+2023-07-02 23:25:44.337 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-02 23:25:44.487 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:25:44.500 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9000 (http) with context path '/api'
+2023-07-02 23:25:44.628 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Started SpringBaseApplication in 2.01 seconds (JVM running for 2.624)
+2023-07-02 23:25:49.870 [http-nio-9000-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-02 23:25:49.870 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-02 23:25:49.872 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2023-07-02 23:25:49.925 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
+2023-07-02 23:25:50.041 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
+2023-07-02 23:25:50.154 [http-nio-9000-exec-1] INFO  com.eztech.springbase.aop.OperationLogAspect - {"duration":247,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311549899}
+2023-07-02 23:28:36.915 [http-nio-9000-exec-2] INFO  com.eztech.springbase.aop.OperationLogAspect - {"duration":128721,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311588192}
+2023-07-02 23:28:36.999 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
+2023-07-02 23:28:37.003 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
+2023-07-02 23:28:38.557 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2023-07-02 23:28:38.558 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Starting SpringBaseApplication using Java 1.8.0_372 on MacBook-Pro.local with PID 28105 (/Users/chenqinru/Project/spring-base/target/classes started by chenqinru in /Users/chenqinru/Project/spring-base)
+2023-07-02 23:28:38.559 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - The following 1 profile is active: "dev"
+2023-07-02 23:28:38.586 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-02 23:28:38.586 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-02 23:28:39.503 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9000 (http)
+2023-07-02 23:28:39.508 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:28:39.508 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 23:28:39.508 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-02 23:28:39.544 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2023-07-02 23:28:39.544 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 957 ms
+2023-07-02 23:28:40.071 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-02 23:28:40.237 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9000"]
+2023-07-02 23:28:40.250 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9000 (http) with context path '/api'
+2023-07-02 23:28:40.378 [restartedMain] INFO  com.eztech.springbase.SpringBaseApplication - Started SpringBaseApplication in 2.125 seconds (JVM running for 2.49)
