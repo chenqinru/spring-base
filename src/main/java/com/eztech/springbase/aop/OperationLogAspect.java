@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -21,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Aspect
-@Component
+//@Component
 @Slf4j
 public class OperationLogAspect {
 

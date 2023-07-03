@@ -1,3 +1,0 @@
-2023-07-03 00:00:14.995 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,nickname,username,password,birthday,status,create_time,update_time FROM user WHERE id=?
-2023-07-03 00:00:15.005 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - ==> Parameters: 1(Integer)
-2023-07-03 00:00:15.021 [http-nio-9000-exec-1] DEBUG com.eztech.springbase.mapper.UserMapper.selectById - <==      Total: 1

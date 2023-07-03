@@ -20,11 +20,17 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return new LogInterceptor();
     }
 
+    //@Bean
+    //@Order(1)
+    //public ExceptionResolver exceptionResolver() {
+    //    return new ExceptionResolver();
+    //}
+
     //实现拦截器 要拦截的路径以及不拦截的路径
     @Override
     public void addInterceptors(@NotNull InterceptorRegistry registry) {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
-        //registry.addInterceptor(logInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(logInterceptor()).addPathPatterns("/**");
         //registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
     }
 
