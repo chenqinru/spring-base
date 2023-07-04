@@ -5,7 +5,6 @@ import com.eztech.springbase.dto.user.SaveUserDto;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.service.IUserService;
-import com.eztech.springbase.utils.MethodUtil;
 import com.eztech.springbase.validation.CreateGroup;
 import com.eztech.springbase.validation.UpdateGroup;
 import com.eztech.springbase.vo.PageVo;
@@ -42,7 +41,6 @@ public class UserController {
     @GetMapping("/list")
     @ApiOperation("用户列表")
     public PageVo<UserVo> list(@Validated ListUserDto listUserDto) {
-        //throw new CustomException(ResultEnum.GET_ERROR, MethodUtil.getLineInfo());
         return userService.list(listUserDto);
     }
 
@@ -70,7 +68,7 @@ public class UserController {
     @GetMapping("/{id}")
     @ApiOperation("用户详情")
     public UserVo read(@PathVariable Integer id) throws CustomException {
-        return Optional.ofNullable(userService.getById(id)).orElseThrow(() -> new CustomException(ResultEnum.GET_ERROR, MethodUtil.getLineInfo())).buildVo(new UserVo());
+        return Optional.ofNullable(userService.getById(id)).orElseThrow(() -> new CustomException(ResultEnum.GET_ERROR)).buildVo(new UserVo());
     }
 
 

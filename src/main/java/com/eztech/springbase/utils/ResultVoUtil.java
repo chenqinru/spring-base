@@ -4,19 +4,25 @@ package com.eztech.springbase.utils;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.vo.ResultVo;
 
+
 /**
+ * 相应工具类
+ *
  * @author CQR
+ * @date 2023/07/04
  */
-public class ResultVoUtil {
+public final class ResultVoUtil {
 
     /**
      * 私有化工具类 防止被实例化
      * j
      */
-    private ResultVoUtil() {}
+    private ResultVoUtil() {
+    }
 
     /**
      * 成功
+     *
      * @param data 需要返回的数据
      * @return data
      */
@@ -30,14 +36,16 @@ public class ResultVoUtil {
 
     /**
      * 成功
+     *
      * @return 返回空
      */
-    public static  <T> ResultVo<T> ok() {
+    public static <T> ResultVo<T> ok() {
         return ok(null);
     }
 
     /**
      * 错误
+     *
      * @param resultEnum 错误枚举类
      * @return 错误信息
      */
@@ -50,8 +58,9 @@ public class ResultVoUtil {
 
     /**
      * 错误
+     *
      * @param code 状态码
-     * @param msg 消息
+     * @param msg  消息
      * @return ResultBean
      */
     public static <T> ResultVo<T> fail(Integer code, String msg) {
@@ -63,6 +72,7 @@ public class ResultVoUtil {
 
     /**
      * 错误
+     *
      * @param msg 错误信息
      * @return ResultBean
      */
@@ -72,6 +82,7 @@ public class ResultVoUtil {
 
     /**
      * 错误
+     *
      * @return ResultBean
      */
     public static <T> ResultVo<T> fail() {

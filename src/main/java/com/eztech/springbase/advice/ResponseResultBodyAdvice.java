@@ -2,7 +2,6 @@ package com.eztech.springbase.advice;
 
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.utils.MethodUtil;
 import com.eztech.springbase.utils.ResultVoUtil;
 import com.eztech.springbase.vo.ResultVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,7 +65,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
             return body;
         }
         // 避免swagger，Knife4j失效
-        if(Arrays.asList(EXCLUDE).contains(returnType.getDeclaringClass().getSimpleName())){
+        if (Arrays.asList(EXCLUDE).contains(returnType.getDeclaringClass().getSimpleName())) {
             return body;
         }
         // String类型不能直接包装，所以要进行些特别的处理
@@ -76,7 +75,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
                 // 将数据包装在Result里后，再转换为json字符串响应给前端
                 return objectMapper.writeValueAsString(ResultVoUtil.ok(body));
             } catch (JsonProcessingException e) {
-                throw new CustomException(ResultEnum.FAIL, MethodUtil.getLineInfo());
+                throw new CustomException(ResultEnum.FAIL);
             }
         }
 

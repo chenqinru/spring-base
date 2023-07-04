@@ -50,9 +50,9 @@ mybatis-plus:
 #日志配置
 logging:
   config: classpath:logback-spring.xml #使用logback进行配置
-  level:
-    com.eztech.springbase:
-      mapper: debug # mapper debug模式日志输出，此配置和mybatis-plus.configuration.log-impl配置一个即可
+#  level:
+#    com.eztech.springbase:
+#      mapper: debug # mapper debug模式日志输出，此配置和mybatis-plus.configuration.log-impl配置一个即可
 
 # knife4j
 knife4j:

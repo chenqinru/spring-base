@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.eztech.springbase.annotation.OperationLogging;
 import com.eztech.springbase.entity.OperationLog;
 import com.eztech.springbase.service.impl.OperationLogServiceImpl;
-import com.eztech.springbase.utils.HttpUtils;
+import com.eztech.springbase.utils.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -53,11 +53,11 @@ public class OperationLogAspect {
     @Transactional(rollbackFor = Exception.class)
     public void buildAndSaveLog(JoinPoint joinPoint, OperationLogging operationLogging, String resultStr) {
         OperationLog operationLog = new OperationLog();
-        Optional<HttpServletRequest> request = HttpUtils.getRequest();
+        Optional<HttpServletRequest> request = RequestUtils.getRequest();
         //请求描述
         operationLog.setDescription(operationLogging.description());
         //请求ip
-        request.map(HttpUtils::getIpAddress).ifPresent(operationLog::setIp);
+        request.map(RequestUtils::getIpAddress).ifPresent(operationLog::setIp);
         //请求方法
         request.map(HttpServletRequest::getMethod).ifPresent(operationLog::setMethod);
         //请求地址

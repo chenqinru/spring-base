@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eztech.springbase.entity.OperationLog;
 import com.eztech.springbase.mapper.OperationLogMapper;
 import com.eztech.springbase.service.IOperationLogService;
-import com.eztech.springbase.utils.HttpUtils;
+import com.eztech.springbase.utils.RequestUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +21,11 @@ public class OperationLogServiceImpl extends ServiceImpl<OperationLogMapper, Ope
     @Override
     public OperationLog add(String msg) {
         //请求对象
-        Optional<HttpServletRequest> request = HttpUtils.getRequest();
+        Optional<HttpServletRequest> request = RequestUtils.getRequest();
         //日志对象
         OperationLog operationLog = new OperationLog();
         //请求ip
-        request.map(HttpUtils::getIpAddress).ifPresent(operationLog::setIp);
+        request.map(RequestUtils::getIpAddress).ifPresent(operationLog::setIp);
         //请求方法
         request.map(HttpServletRequest::getMethod).ifPresent(operationLog::setMethod);
         //请求地址
