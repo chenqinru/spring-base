@@ -41,9 +41,9 @@ public class UserController {
      */
     @GetMapping("/list")
     @ApiOperation("用户列表")
-    public PageVo<UserVo> list(ListUserDto listUserDto) {
-        throw new CustomException(ResultEnum.GET_ERROR, MethodUtil.getLineInfo());
-        //return userService.list(listUserDto);
+    public PageVo<UserVo> list(@Validated ListUserDto listUserDto) {
+        //throw new CustomException(ResultEnum.GET_ERROR, MethodUtil.getLineInfo());
+        return userService.list(listUserDto);
     }
 
 
