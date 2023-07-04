@@ -50,7 +50,7 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 2023-07-02 23:08:48.612 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
 2023-07-02 23:08:59.275 [http-nio-9000-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
 2023-07-02 23:08:59.389 [http-nio-9000-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
-2023-07-02 23:08:59.589 [http-nio-9000-exec-9] INFO  com.eztech.springbase.aop.OperationLogAspect - {"description":"","duration":385,"ip":"0:0:0:0:0:0:0:1","method":"list","params":"[{\"column\":\"id\",\"current\":1,\"isAsc\":false,\"size\":10}]","result":"{\"pages\":1,\"records\":[{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}],\"total\":1}","time":1688310539200}
+2023-07-02 23:08:59.589 [http-nio-9000-exec-9] INFO  com.eztech.springbase.aop.LogAspect - {"description":"","duration":385,"ip":"0:0:0:0:0:0:0:1","method":"list","params":"[{\"column\":\"id\",\"current\":1,\"isAsc\":false,\"size\":10}]","result":"{\"pages\":1,\"records\":[{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}],\"total\":1}","time":1688310539200}
 2023-07-02 23:11:48.554 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
 2023-07-02 23:11:48.559 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
 2023-07-02 23:11:51.176 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
@@ -73,7 +73,7 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 2023-07-02 23:11:54.108 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 2023-07-02 23:12:18.144 [http-nio-9000-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
 2023-07-02 23:12:18.267 [http-nio-9000-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
-2023-07-02 23:12:18.375 [http-nio-9000-exec-5] INFO  com.eztech.springbase.aop.OperationLogAspect - {"description":"","duration":245,"ip":"0:0:0:0:0:0:0:1","method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688310738124}
+2023-07-02 23:12:18.375 [http-nio-9000-exec-5] INFO  com.eztech.springbase.aop.LogAspect - {"description":"","duration":245,"ip":"0:0:0:0:0:0:0:1","method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688310738124}
 2023-07-02 23:25:38.412 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
 2023-07-02 23:25:38.418 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
 2023-07-02 23:25:42.896 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
@@ -96,8 +96,8 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 2023-07-02 23:25:49.872 [http-nio-9000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
 2023-07-02 23:25:49.925 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Starting...
 2023-07-02 23:25:50.041 [http-nio-9000-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Start completed.
-2023-07-02 23:25:50.154 [http-nio-9000-exec-1] INFO  com.eztech.springbase.aop.OperationLogAspect - {"duration":247,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311549899}
-2023-07-02 23:28:36.915 [http-nio-9000-exec-2] INFO  com.eztech.springbase.aop.OperationLogAspect - {"duration":128721,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311588192}
+2023-07-02 23:25:50.154 [http-nio-9000-exec-1] INFO  com.eztech.springbase.aop.LogAspect - {"duration":247,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311549899}
+2023-07-02 23:28:36.915 [http-nio-9000-exec-2] INFO  com.eztech.springbase.aop.LogAspect - {"duration":128721,"method":"read","params":"[1]","result":"{\"id\":1,\"nickname\":\"admin\",\"username\":\"admin\"}","time":1688311588192}
 2023-07-02 23:28:36.999 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown initiated...
 2023-07-02 23:28:37.003 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - DatebookHikariCP - Shutdown completed.
 2023-07-02 23:28:38.557 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final

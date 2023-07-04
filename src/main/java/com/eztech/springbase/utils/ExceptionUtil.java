@@ -2,9 +2,7 @@ package com.eztech.springbase.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 
 /**
  * 异常工具类
@@ -43,9 +41,31 @@ public class ExceptionUtil {
             swStr = sw.toString();
         } catch (IOException ex) {
             ex.printStackTrace();
-            log.error(ex.getMessage());
+            //log.error(ex.getMessage());
         }
         return swStr;
+    }
+
+    /**
+     * 获取完整的异常信息
+     *
+     * @param ex
+     * @return
+     */
+    public static String getExceptionMessage(Exception ex) {
+        // 先打印控制台
+        ex.printStackTrace();
+        // 在输出异常信息到日志文件
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream pout = new PrintStream(out);
+        ex.printStackTrace(pout);
+        String ret = out.toString();
+        pout.close();
+        try {
+            out.close();
+        } catch (Exception ignored) {
+        }
+        return ret;
     }
 
 }

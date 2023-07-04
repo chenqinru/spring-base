@@ -2,8 +2,9 @@ package com.eztech.springbase.intecepter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.eztech.springbase.entity.OperationLog;
-import com.eztech.springbase.service.IOperationLogService;
+import com.eztech.springbase.entity.Log;
+import com.eztech.springbase.enums.LogTypeEnum;
+import com.eztech.springbase.service.ILogService;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 /**
  * 日志拦截器
@@ -22,8 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor {
 
+    private final ThreadLocal<LocalDateTime> startTime = new ThreadLocal<>();
+
     @Autowired
-    private IOperationLogService logService;
+    private ILogService logService;
 
     /**
      * 这个方法在业务处理器处理请求之前被调用，可以在此方法中做一些权限的校验。
@@ -48,7 +52,7 @@ public class LogInterceptor implements HandlerInterceptor {
         //    requestParam = request.getQueryString();
         //}
         //保存请求日志到数据库
-        OperationLog operationLog = logService.add(json.toJSONString());
+        Log operationLog = logService.add(LogTypeEnum.INFO,json.toJSONString());
         //记录日志
         log.info("请求日志:{}", JSON.toJSONString(operationLog));
 

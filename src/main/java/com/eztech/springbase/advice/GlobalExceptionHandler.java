@@ -1,8 +1,9 @@
 package com.eztech.springbase.advice;
 
+import com.eztech.springbase.enums.LogTypeEnum;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.service.IOperationLogService;
+import com.eztech.springbase.service.ILogService;
 import com.eztech.springbase.utils.ExceptionUtil;
 import com.eztech.springbase.utils.ResultVoUtil;
 import com.eztech.springbase.vo.ResultVo;
@@ -21,7 +22,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.Objects;
 
-
 /**
  * @author CQR
  */
@@ -30,7 +30,7 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
     @Autowired
-    private IOperationLogService logService;
+    private ILogService logService;
 
     /**
      * 自定义异常
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = CustomException.class)
     public ResultVo<?> processException(CustomException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(Objects.requireNonNull(ResultEnum.getByCode(e.getCode())));
     }
 
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({BindException.class})
     public ResultVo<?> bindException(BindException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         BindingResult bindingResult = e.getBindingResult();
         return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultVo<?> bindException(MethodArgumentNotValidException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         BindingResult bindingResult = e.getBindingResult();
         return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResultVo<?> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.ARGUMENT_TYPE_MISMATCH);
     }
 
@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultVo<?> httpMessageNotReadable(HttpMessageNotReadableException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.FORMAT_ERROR);
     }
 
@@ -92,7 +92,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResultVo<?> httpReqMethodNotSupported(HttpRequestMethodNotSupportedException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.REQ_METHOD_NOT_SUPPORT);
     }
 
@@ -102,9 +102,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     public ResultVo<?> exception(Exception e) {
-        e.printStackTrace();
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(e.getLocalizedMessage());
+        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
+        e.printStackTrace();
         return ResultVoUtil.fail(ResultEnum.UNKNOWN_EXCEPTION);
     }
 }

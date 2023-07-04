@@ -24,7 +24,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(@NotNull InterceptorRegistry registry) {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(logInterceptor()).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
+        //registry.addInterceptor(logInterceptor()).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
         //registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
     }
 

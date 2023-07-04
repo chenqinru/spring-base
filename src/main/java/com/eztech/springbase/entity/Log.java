@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class OperationLog implements Serializable {
+public class Log implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,9 +27,9 @@ public class OperationLog implements Serializable {
     private Long id;
 
     /**
-     * 操作内容描述
+     * 日志类型
      */
-    private String description;
+    private String type;
 
     /**
      * 账号
@@ -47,34 +47,19 @@ public class OperationLog implements Serializable {
     private String path;
 
     /**
-     * IP地址
-     */
-    private String ip;
-
-    /**
-     * 函数名
-     */
-    private String func;
-
-    /**
-     * 方法名
+     * 请求方法
      */
     private String method;
 
     /**
-     * 参数
+     * 信息
      */
-    private String params;
+    private String msg;
 
     /**
-     * 返回结果
+     * IP地址
      */
-    private String result;
-
-    /**
-     * 耗时
-     */
-    private Long duration;
+    private String ip;
 
     /**
      * 创建时间
