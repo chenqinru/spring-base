@@ -5,7 +5,7 @@ import com.eztech.springbase.entity.Log;
 import com.eztech.springbase.enums.LogTypeEnum;
 import com.eztech.springbase.mapper.OperationLogMapper;
 import com.eztech.springbase.service.ILogService;
-import com.eztech.springbase.utils.RequestUtils;
+import com.eztech.springbase.utils.RequestUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +21,11 @@ public class LogServiceImpl extends ServiceImpl<OperationLogMapper, Log> impleme
     @Override
     public Log add(LogTypeEnum typeEnum, String msg) {
         //请求对象
-        Optional<HttpServletRequest> request = RequestUtils.getRequest();
+        Optional<HttpServletRequest> request = RequestUtil.getRequest();
         //日志对象
         Log log = new Log();
         //请求ip
-        request.map(RequestUtils::getIpAddress).ifPresent(log::setIp);
+        request.map(RequestUtil::getIpAddress).ifPresent(log::setIp);
         //请求方法
         request.map(HttpServletRequest::getMethod).ifPresent(log::setMethod);
         //请求地址

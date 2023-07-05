@@ -58,3 +58,16 @@ logging:
 knife4j:
   enable: true
 
+# 放行的url
+security:
+  ignore:
+    urls:
+      - /api/v1/user/login
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /doc.html
+      - /v2/api-docs
+      - /webjars/**
+      - /druid/**
+      - /favicon.ico
+

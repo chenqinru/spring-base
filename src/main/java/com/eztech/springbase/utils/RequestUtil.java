@@ -17,12 +17,12 @@ import java.util.Optional;
  * @author chenqinru
  * @date 2023/07/03
  */
-public final class RequestUtils {
+public final class RequestUtil {
 
     /**
      * 私有化工具类 防止被实例化
      */
-    private RequestUtils() {
+    private RequestUtil() {
     }
 
     /**

@@ -8,7 +8,6 @@ import com.eztech.springbase.utils.ExceptionUtil;
 import com.eztech.springbase.utils.ResultVoUtil;
 import com.eztech.springbase.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -29,7 +29,7 @@ import java.util.Objects;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @Autowired
+    @Resource
     private ILogService logService;
 
     /**

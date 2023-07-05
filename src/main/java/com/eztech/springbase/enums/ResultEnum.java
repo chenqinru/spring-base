@@ -62,7 +62,23 @@ public enum ResultEnum {
     /**
      * 请求方式不支持
      */
-    REQ_METHOD_NOT_SUPPORT(110, "请求方式不支持");
+    REQ_METHOD_NOT_SUPPORT(110, "请求方式不支持"),
+
+    /**
+     * token为空
+     */
+    TOKEN_EMPTY(201, "token为空"),
+
+    /**
+     * token无效
+     */
+    TOKEN_INVALID(202, "token无效"),
+
+    /**
+     * token过期
+     */
+    TOKEN_EXPIRED(203, "token过期"),
+    ;
 
     /**
      * 代码
