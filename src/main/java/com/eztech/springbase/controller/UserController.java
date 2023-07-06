@@ -1,10 +1,12 @@
 package com.eztech.springbase.controller;
 
 import com.eztech.springbase.dto.user.ListUserDto;
+import com.eztech.springbase.dto.user.LoginDto;
 import com.eztech.springbase.dto.user.SaveUserDto;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.service.IUserService;
+import com.eztech.springbase.utils.JwtUtil;
 import com.eztech.springbase.validation.CreateGroup;
 import com.eztech.springbase.validation.UpdateGroup;
 import com.eztech.springbase.vo.PageVo;
@@ -95,5 +97,14 @@ public class UserController {
     @ApiOperation("单个/批量删除用户")
     public Boolean delete(@RequestBody List<Integer> ids) {
         return userService.removeByIds(ids);
+    }
+
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    @ApiOperation(value = "登录")
+    public String login(@Validated @RequestBody LoginDto loginDto) {
+        return JwtUtil.generateToken(userService.login(loginDto));
     }
 }

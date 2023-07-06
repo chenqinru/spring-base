@@ -105,6 +105,6 @@ public class GlobalExceptionHandler {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
         logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
         e.printStackTrace();
-        return ResultVoUtil.fail(ResultEnum.UNKNOWN_EXCEPTION);
+        return ResultVoUtil.fail(e.getLocalizedMessage());
     }
 }

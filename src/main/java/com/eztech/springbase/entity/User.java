@@ -26,13 +26,8 @@ public class User implements Serializable, UserDetails {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
-
-    /**
-     * 昵称
-     */
-    private String nickname;
 
     /**
      * 用户名
@@ -43,6 +38,11 @@ public class User implements Serializable, UserDetails {
      * 密码
      */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickname;
 
     /**
      * 生日
@@ -81,21 +81,21 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

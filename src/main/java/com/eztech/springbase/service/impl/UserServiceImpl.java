@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eztech.springbase.dto.user.ListUserDto;
+import com.eztech.springbase.dto.user.LoginDto;
 import com.eztech.springbase.entity.User;
 import com.eztech.springbase.mapper.UserMapper;
 import com.eztech.springbase.service.IUserService;
@@ -11,8 +12,15 @@ import com.eztech.springbase.vo.PageVo;
 import com.eztech.springbase.vo.user.UserVo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +30,22 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+
+    @Resource
+    private UserDetailsService userDetailsService;
+
+    @Resource
+    private AuthenticationManager authenticationManager;
+
+    @Resource
+    private BCryptPasswordEncoder encoder;
+
+    @Override
+    public boolean save(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return super.save(user);
+    }
+
     @Override
     public PageVo<UserVo> list(ListUserDto listUserDto) {
         //封装查询对象
@@ -36,5 +60,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         pageVo.setRecords(list);
 
         return pageVo;
+    }
+
+    @Override
+    public User login(LoginDto loginDto) throws AuthenticationException {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+        // 使用spring security的认证方法
+        Authentication authenticate = authenticationManager.authenticate(token);
+
+        return (User) authenticate.getPrincipal();
+
     }
 }

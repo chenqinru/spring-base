@@ -62,7 +62,8 @@ knife4j:
 security:
   ignore:
     urls:
-      - /api/v1/user/login
+#      - /user/create
+      - /user/login
       - /swagger-ui.html
       - /swagger-resources/**
       - /doc.html
