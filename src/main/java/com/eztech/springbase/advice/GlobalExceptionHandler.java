@@ -1,6 +1,5 @@
 package com.eztech.springbase.advice;
 
-import com.eztech.springbase.enums.LogTypeEnum;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.service.ILogService;
@@ -38,7 +37,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = CustomException.class)
     public ResultVo<?> processException(CustomException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(Objects.requireNonNull(ResultEnum.getByCode(e.getCode())));
     }
 
@@ -49,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({BindException.class})
     public ResultVo<?> bindException(BindException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         BindingResult bindingResult = e.getBindingResult();
         return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
@@ -61,7 +60,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultVo<?> bindException(MethodArgumentNotValidException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         BindingResult bindingResult = e.getBindingResult();
         return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
@@ -72,7 +71,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResultVo<?> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.ARGUMENT_TYPE_MISMATCH);
     }
 
@@ -82,7 +81,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultVo<?> httpMessageNotReadable(HttpMessageNotReadableException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.FORMAT_ERROR);
     }
 
@@ -92,7 +91,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResultVo<?> httpReqMethodNotSupported(HttpRequestMethodNotSupportedException e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
         return ResultVoUtil.fail(ResultEnum.REQ_METHOD_NOT_SUPPORT);
     }
 
@@ -103,7 +102,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResultVo<?> exception(Exception e) {
         log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
+        //logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
         e.printStackTrace();
         return ResultVoUtil.fail(e.getLocalizedMessage());
     }
