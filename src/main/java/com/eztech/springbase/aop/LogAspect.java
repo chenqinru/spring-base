@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+/**
+ * 日志切面
+ *
+ * @author chenqinru
+ * @date 2023/07/09
+ */
 @Aspect
 @Slf4j
 @Component
@@ -20,28 +26,21 @@ public class LogAspect {
     @Resource
     private LogServiceImpl logService;
 
+    /**
+     * 匹配controller
+     */
     @Pointcut("execution (* com.eztech.springbase.controller..*(..))")
-    public void beforeController() {
+    public void point() {
     }
 
-    // 切点表达式：捕获带有@ExceptionHandler(MethodArgumentNotValidException.class)注解的方法
-    @Pointcut("@annotation(org.springframework.web.bind.annotation.ExceptionHandler) && args(exception)")
-    public void beforeException(Exception exception) {
-    }
-
-    @Before("beforeController()")
-    public void handleController(JoinPoint joinPoint) {
+    /**
+     * 进入控制器之前记录请求日志
+     *
+     * @param joinPoint 连接点
+     */
+    @Before("point()")
+    public void beforeController(JoinPoint joinPoint) {
         Log add = logService.add(LogTypeEnum.INFO, JSON.toJSONString(joinPoint.getArgs()));
-        log.info("请求日志:{}" , JSON.toJSONString(add));
+        log.info("请求日志:{}", JSON.toJSONString(add));
     }
-
-    @Before("beforeException(exception)")
-    public void handleException(JoinPoint joinPoint, Exception exception) {
-        logService.add(LogTypeEnum.ERROR, exception.getLocalizedMessage().trim());
-    }
-
-    //@AfterThrowing(pointcut = "point()" , throwing = "e")
-    //public void afterThrowing(Exception e) {
-    //    logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
-    //}
 }

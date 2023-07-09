@@ -6,6 +6,7 @@ import com.eztech.springbase.dto.user.SaveUserDto;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.service.IUserService;
+import com.eztech.springbase.utils.JwtUtil;
 import com.eztech.springbase.validation.CreateGroup;
 import com.eztech.springbase.validation.UpdateGroup;
 import com.eztech.springbase.vo.PageVo;
@@ -104,7 +105,6 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "登录")
     public String login(@Validated @RequestBody LoginDto loginDto) {
-        throw new CustomException(ResultEnum.FAIL);
-        //return JwtUtil.generateToken(userService.login(loginDto));
+        return JwtUtil.generateToken(userService.login(loginDto));
     }
 }

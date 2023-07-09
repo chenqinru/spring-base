@@ -1,8 +1,6 @@
 package com.eztech.springbase.config;
 
-import com.eztech.springbase.intecepter.LogInterceptor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -15,16 +13,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
-    @Bean
-    public LogInterceptor logInterceptor() {
-        return new LogInterceptor();
-    }
+    //@Bean
+    //public LogInterceptor logInterceptor() {
+    //    return new LogInterceptor();
+    //}
+
+    //@Bean
+    //public FilterRegistrationBean<RequestFilter> httpServletRequestReplacedFilter() {
+    //    FilterRegistrationBean<RequestFilter> registration = new FilterRegistrationBean<>(new RequestFilter());
+    //    // /* 是全部的请求拦截，和Interceptor的拦截地址/**区别开
+    //    registration.addUrlPatterns("/*");
+    //    registration.setName("requestFilter");
+    //    registration.setOrder(1);
+    //    return registration;
+    //}
 
     //实现拦截器 要拦截的路径以及不拦截的路径
     @Override
     public void addInterceptors(@NotNull InterceptorRegistry registry) {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
-        //registry.addInterceptor(logInterceptor()).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
+        //registry.addInterceptor(logInterceptor()).addPathPatterns("/**")
+        //        .excludePathPatterns("/swagger-ui.html")
+        //        .excludePathPatterns("/swagger-resources/**")
+        //        .excludePathPatterns("/doc.html")
+        //        .excludePathPatterns("/v2/api-docs")
+        //        .excludePathPatterns("/druid/**")
+        //        .excludePathPatterns("/webjars/**")
+        //        .excludePathPatterns("/favicon.ico");
         //registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/doc.html").excludePathPatterns("/webjars/**");
     }
 

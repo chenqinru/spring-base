@@ -1,19 +1,20 @@
 package com.eztech.springbase.intecepter;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.eztech.springbase.entity.Log;
 import com.eztech.springbase.enums.LogTypeEnum;
 import com.eztech.springbase.service.ILogService;
+import com.eztech.springbase.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
 
 /**
  * 日志拦截器
@@ -23,8 +24,6 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor {
-
-    private final ThreadLocal<LocalDateTime> startTime = new ThreadLocal<>();
 
     @Autowired
     private ILogService logService;
@@ -41,18 +40,18 @@ public class LogInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
-        JSONObject json = new JSONObject();
-        request.getParameterMap().forEach((key, value) -> json.put(key, request.getParameter(key)));
+        //JSONObject json = new JSONObject();
+        //request.getParameterMap().forEach((key, value) -> json.put(key, request.getParameter(key)));
         //客户端请求参数值
-        String requestParam;
+        String param;
         //如果请求是POST获取body字符串，否则GET的话用request.getQueryString()获取参数值
-        //if (StringUtils.equalsIgnoreCase(HttpMethod.POST.name(), request.getMethod())) {
-        //    requestParam = RequestUtils.getBodyString(request);
-        //} else {
-        //    requestParam = request.getQueryString();
-        //}
+        if (StringUtils.equalsIgnoreCase(HttpMethod.POST.name(), request.getMethod())) {
+            param = RequestUtil.getBodyString(request);
+        } else {
+            param = request.getQueryString();
+        }
         //保存请求日志到数据库
-        Log operationLog = logService.add(LogTypeEnum.INFO,json.toJSONString());
+        Log operationLog = logService.add(LogTypeEnum.INFO, param);
         //记录日志
         log.info("请求日志:{}", JSON.toJSONString(operationLog));
 

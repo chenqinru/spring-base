@@ -13,25 +13,37 @@ spring:
     active: @activatedProperties@
   # 配置数据库连接池
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      # 最小连接
-      minimum-idle: 5
-      # 最大连接
-      maximum-pool-size: 15
-      # 自动提交
-      auto-commit: true
-      # 最大空闲时间
-      idle-timeout: 30000
-      # 连接池名称
-      pool-name: DatebookHikariCP
-      # 最大生命周期
-      max-lifetime: 900000
-      # 连接超时时间
-      connection-timeout: 15000
-      # 心跳检测
-      connection-test-query: select 1
+    druid:
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+      max-wait: 60000
+      connect-timeout: 30000
+      test-while-idle: true
+      #web模块
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+      #监控配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: druid
+      # 监控过滤器配置
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          enabled: true
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
   # 配置Redis
   redis:
     jedis:
@@ -64,6 +76,7 @@ security:
     urls:
 #      - /user/create
       - /user/login
+      - /login/**
       - /swagger-ui.html
       - /swagger-resources/**
       - /doc.html
