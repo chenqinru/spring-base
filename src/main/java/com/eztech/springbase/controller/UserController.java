@@ -3,8 +3,10 @@ package com.eztech.springbase.controller;
 import com.eztech.springbase.dto.user.ListUserDto;
 import com.eztech.springbase.dto.user.LoginDto;
 import com.eztech.springbase.dto.user.SaveUserDto;
+import com.eztech.springbase.entity.User;
 import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
+import com.eztech.springbase.mapper.UserMapper;
 import com.eztech.springbase.service.IUserService;
 import com.eztech.springbase.utils.JwtUtil;
 import com.eztech.springbase.validation.CreateGroup;
@@ -14,7 +16,6 @@ import com.eztech.springbase.vo.user.UserVo;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,20 @@ import java.util.Optional;
  */
 @RestController
 @Api(tags = "用户")
-@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
     @Resource
     private IUserService userService;
+
+    @Resource
+    private UserMapper userMapper;
+
+    @GetMapping("/test")
+    @ApiOperation("测试")
+    public List<User> test(){
+        return userMapper.selectAllUserAndRoles();
+    }
 
     /**
      * 用户列表
@@ -50,14 +59,14 @@ public class UserController {
     /**
      * 创建用户
      *
-     * @param userDto 用户dto
+     * @param saveUserDto 用户dto
      * @return {@link Boolean}
      */
     @PostMapping("/create")
     @ApiOperation("创建用户")
     @ApiOperationSupport(ignoreParameters = {"id"})
-    public Boolean create(@Validated({CreateGroup.class}) @RequestBody SaveUserDto userDto) {
-        return userService.save(userDto.buildEntity());
+    public Boolean create(@Validated({CreateGroup.class}) @RequestBody SaveUserDto saveUserDto) {
+        return userService.save(saveUserDto.buildEntity());
     }
 
 
@@ -77,13 +86,13 @@ public class UserController {
     /**
      * 更新用户
      *
-     * @param userDto 用户dto
+     * @param saveUserDto 用户dto
      * @return {@link Boolean}
      */
     @PutMapping("/update")
     @ApiOperation("更新用户")
-    public Boolean update(@Validated({UpdateGroup.class}) @RequestBody SaveUserDto userDto) {
-        return userService.updateById(userDto.buildEntity());
+    public Boolean update(@Validated({UpdateGroup.class}) @RequestBody SaveUserDto saveUserDto) {
+        return userService.updateById(saveUserDto.buildEntity());
     }
 
 

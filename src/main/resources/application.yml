@@ -56,6 +56,8 @@ spring:
 # mybatis_plus
 mybatis-plus:
 #  configuration:
+    # MyBatisPlus 驼峰命名
+#    map-underscore-to-camel-case: true
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #sql日志的打印
   mapper-locations: classpath:mapping/*Mapper.xml # xml路径
 
@@ -74,9 +76,8 @@ knife4j:
 security:
   ignore:
     urls:
-#      - /user/create
+      - /user/create
       - /user/login
-      - /login/**
       - /swagger-ui.html
       - /swagger-resources/**
       - /doc.html

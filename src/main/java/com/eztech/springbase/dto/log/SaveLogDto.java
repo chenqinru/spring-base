@@ -1,4 +1,4 @@
-package com.eztech.springbase.dto.user;
+package com.eztech.springbase.dto.log;
 
 import com.eztech.springbase.dto.BaseDto;
 import com.eztech.springbase.entity.User;
@@ -14,15 +14,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import java.util.Date;
+import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
 
 /**
  * @author CQR
  */
 @Data
-@ApiModel("用户写入需要的表单数据")
+@ApiModel("写入的日志数据")
 @EqualsAndHashCode(callSuper = false)
-public class SaveUserDto extends BaseDto<User> {
+public class SaveLogDto extends BaseDto<User> {
 
     @ApiModelProperty(value = "id" , required = true)
     @NotNull(message = "id不能为空" , groups = {UpdateGroup.class})
@@ -41,7 +42,7 @@ public class SaveUserDto extends BaseDto<User> {
      */
     @ApiModelProperty(value = "密码" , required = true)
     @NotEmpty(message = "密码不能为空")
-    //@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{8,20}$" , message = "密码不符合规范")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{8,20}$" , message = "密码不符合规范")
     private String password;
 
     /**
@@ -58,7 +59,7 @@ public class SaveUserDto extends BaseDto<User> {
     @ApiModelProperty("生日")
     @Past(message = "生日时间必须小于当前时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
+    private LocalDate birthday;
 
     /**
      * 构造实体

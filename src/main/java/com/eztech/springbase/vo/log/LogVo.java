@@ -1,4 +1,4 @@
-package com.eztech.springbase.vo.user;
+package com.eztech.springbase.vo.log;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,21 +6,26 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * @author CQR
  */
 @Data
-@ApiModel("用户详情")
-public class UserVo {
+@ApiModel("日志")
+public class LogVo {
 
     /**
      * 主键
      */
     @ApiModelProperty("主键")
     private Integer id;
+
+    /**
+     * 日志类型
+     */
+    @ApiModelProperty("日志类型")
+    private String type;
 
     /**
      * 用户名
@@ -35,22 +40,29 @@ public class UserVo {
     private String nickname;
 
     /**
-     * 生日
+     * 请求方式
      */
-    @ApiModelProperty("生日")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthday;
+    @ApiModelProperty("请求方式")
+    private String method;
 
     /**
-     * 用户状态 0正常 1 禁用  -1 删除
+     * 内容
      */
-    @ApiModelProperty("状态")
-    private String status;
+    @ApiModelProperty("内容")
+    private Object msg;
+
+    /**
+     * IP
+     */
+    @ApiModelProperty("IP")
+    private String ip;
 
     /**
      * 创建时间
      */
+    @ApiModelProperty("创建时间")
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+
 }

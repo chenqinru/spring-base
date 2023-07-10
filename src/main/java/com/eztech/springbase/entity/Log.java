@@ -1,12 +1,16 @@
 package com.eztech.springbase.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 操作日志
@@ -18,13 +22,14 @@ import java.util.Date;
 @Accessors(chain = true)
 public class Log implements Serializable {
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
     /**
      * 日志类型
@@ -34,7 +39,7 @@ public class Log implements Serializable {
     /**
      * 账号
      */
-    private String account;
+    private String username;
 
     /**
      * 昵称
@@ -47,7 +52,7 @@ public class Log implements Serializable {
     private String path;
 
     /**
-     * 请求方法
+     * 请求方式
      */
     private String method;
 
@@ -64,12 +69,25 @@ public class Log implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    @JsonProperty("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 
     /**
      * 修改时间 -- 修改时自动更新
      */
-    private Date updateTime;
+    @JsonProperty("update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 
+    /**
+     * 构造VO
+     *
+     * @return VO对象
+     */
+    public <T> T buildVo(T object) {
+        BeanUtils.copyProperties(this, object);
+        return object;
+    }
 
 }

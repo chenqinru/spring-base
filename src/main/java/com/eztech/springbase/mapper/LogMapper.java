@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author CQR
  */
 @Mapper
-public interface OperationLogMapper extends BaseMapper<Log> {
+public interface LogMapper extends BaseMapper<Log> {
 
 }
