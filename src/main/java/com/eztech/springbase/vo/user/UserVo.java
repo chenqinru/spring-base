@@ -1,5 +1,6 @@
 package com.eztech.springbase.vo.user;
 
+import com.eztech.springbase.vo.role.UserRolesVo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -8,9 +9,15 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * @author CQR
+ * 用户详情
+ *
+ * @author chenqinru
+ * @date 2023/07/22
  */
 @Data
 @ApiModel("用户详情")
@@ -45,12 +52,19 @@ public class UserVo {
      * 用户状态 0正常 1 禁用  -1 删除
      */
     @ApiModelProperty("状态")
-    private String status;
+    private Integer status;
 
     /**
      * 创建时间
      */
+    @ApiModelProperty("创建时间")
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+
+    /**
+     * 关联角色
+     */
+    @ApiModelProperty("关联角色")
+    private List<UserRolesVo> roles = new ArrayList<>();
 }

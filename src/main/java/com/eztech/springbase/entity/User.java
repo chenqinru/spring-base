@@ -1,101 +1,84 @@
 package com.eztech.springbase.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import org.springframework.beans.BeanUtils;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * 用户
+ * 用户实体
  *
  * @author chenqinru
  * @date 2023/07/10
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
-public class User implements Serializable, UserDetails {
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键
-     */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+@DynamicInsert
+@DynamicUpdate
+@Entity
+@Table(name = "ez_user")
+@ToString(exclude = {"roles"})
+public class User extends BaseEntity implements UserDetails {
 
     /**
      * 用户名
      */
+    @Column
     private String username;
 
     /**
      * 密码
      */
+    @Column
     private String password;
 
     /**
      * 昵称
      */
+    @Column
     private String nickname;
 
     /**
      * 生日
      */
+    @Column
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     /**
      * 用户状态 0正常 1 禁用  -1 删除
      */
-    private String status;
-
-    /**
-     * 创建时间
-     */
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createTime;
-
-    /**
-     * 修改时间 -- 修改时自动更新
-     */
-    @JsonProperty("update_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
+    @Column
+    private Integer status;
 
     /**
      * 关联角色
      */
-    @TableField(exist = false)
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @BatchSize(size = 100)
+    @JoinTable(
+            name = "ez_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
     /**
-     * 构造VO
-     *
-     * @return VO对象
+     * 授予用户的权限
      */
-    public <T> T buildVo(T object) {
-        BeanUtils.copyProperties(this, object);
-        return object;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public boolean isAccountNonExpired() {

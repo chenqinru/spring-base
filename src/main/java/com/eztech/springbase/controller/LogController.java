@@ -1,9 +1,9 @@
 package com.eztech.springbase.controller;
 
 import com.eztech.springbase.dto.log.ListLogDto;
-import com.eztech.springbase.enums.ResultEnum;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.service.ILogService;
+import com.eztech.springbase.mapper.LogMapper;
+import com.eztech.springbase.service.LogService;
 import com.eztech.springbase.vo.PageVo;
 import com.eztech.springbase.vo.log.LogVo;
 import io.swagger.annotations.Api;
@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
+
 
 /**
- * @author CQR
+ * 日志控制器
+ *
+ * @author chenqinru
+ * @date 2023/07/22
  */
 @RestController
 @Api(tags = "日志")
@@ -24,7 +27,7 @@ import java.util.Optional;
 public class LogController {
 
     @Resource
-    private ILogService logService;
+    private LogService logService;
 
     /**
      * 日志列表
@@ -43,23 +46,23 @@ public class LogController {
      *
      * @param id id
      * @return {@link LogVo}
+     * @throws CustomException 自定义异常
      */
     @GetMapping("/{id}")
     @ApiOperation("日志详情")
     public LogVo read(@PathVariable Integer id) throws CustomException {
-        return Optional.ofNullable(logService.getById(id)).orElseThrow(() -> new CustomException(ResultEnum.GET_ERROR)).buildVo(new LogVo());
+        return LogMapper.INSTANCE.logToVo(logService.findById(id));
     }
 
     /**
      * 单个或批量删除
      *
      * @param ids id列表
-     * @return {@link Boolean}
      */
     @DeleteMapping("/delete")
-    @ApiOperation("单个/批量删除用户")
-    public Boolean delete(@RequestBody List<Integer> ids) {
-        return logService.removeByIds(ids);
+    @ApiOperation("单个或批量删除用户")
+    public void delete(@RequestBody List<Integer> ids) {
+        logService.deleteAllById(ids);
     }
 
 }

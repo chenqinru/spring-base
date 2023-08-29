@@ -1,12 +1,10 @@
 package com.eztech.springbase.dto.log;
 
 import com.eztech.springbase.dto.PageDto;
-import com.eztech.springbase.entity.Log;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.beans.BeanUtils;
 
 /**
  * 日志列表dto
@@ -17,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @ApiModel("列表需要的query数据")
 @EqualsAndHashCode(callSuper = false)
-public class ListLogDto extends PageDto<Log> {
+public class ListLogDto extends PageDto {
 
     /**
      * 日志类型
@@ -32,20 +30,20 @@ public class ListLogDto extends PageDto<Log> {
     private String username;
 
     /**
+     * 昵称
+     */
+    @ApiModelProperty("昵称")
+    private String nickname;
+
+    /**
      * 请求方式
      */
     @ApiModelProperty("请求方式")
     private String method;
 
     /**
-     * 构造实体
-     *
-     * @return 实体对象
+     * 请求路径
      */
-    @Override
-    public Log buildEntity() {
-        Log log = new Log();
-        BeanUtils.copyProperties(this, log);
-        return log;
-    }
+    @ApiModelProperty("请求路径")
+    private String path;
 }

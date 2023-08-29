@@ -4,8 +4,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+
 /**
- * @author CQR
+ * 固定返回格式
+ *
+ * @author chenqinru
+ * @date 2023/07/22
  */
 @Data
 @ApiModel("固定返回格式")

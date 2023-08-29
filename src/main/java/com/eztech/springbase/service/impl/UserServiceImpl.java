@@ -1,62 +1,81 @@
 package com.eztech.springbase.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eztech.springbase.dto.user.ListUserDto;
 import com.eztech.springbase.dto.user.LoginDto;
 import com.eztech.springbase.entity.User;
-import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.mapper.UserMapper;
-import com.eztech.springbase.service.IUserService;
+import com.eztech.springbase.repository.UserRepository;
+import com.eztech.springbase.service.UserService;
+import com.eztech.springbase.specification.UserSpecification;
+import com.eztech.springbase.utils.SecurityUtils;
 import com.eztech.springbase.vo.PageVo;
 import com.eztech.springbase.vo.user.UserVo;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * @author CQR
+ * 用户服务实现
+ *
+ * @author chenqinru
+ * @date 2023/07/19
  */
 @Service
-@AllArgsConstructor
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+@Transactional
+public class UserServiceImpl extends BaseServiceImpl<UserRepository, User> implements UserService {
     @Resource
     private AuthenticationManager authenticationManager;
 
-    @Resource
-    private BCryptPasswordEncoder encoder;
+    @Autowired
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
-    public boolean save(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return super.save(user);
+    public void save(User user) {
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        repository.save(user);
+    }
+
+    @Override
+    public void updateById(User user) {
+        User original = findById(user.getId());
+        user.setRoles(original.getRoles());
+        updateAllById(user);
+    }
+
+    @Override
+    public void updateAllById(User user) {
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        repository.save(user);
     }
 
     @Override
     public PageVo<UserVo> list(ListUserDto listUserDto) {
-        //封装查询对象
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>(listUserDto.buildEntity());
-        queryWrapper.orderBy(true, listUserDto.getIsAsc(), listUserDto.getColumn());
-        //分页查询
-        Page<User> page = page(new Page<>(listUserDto.getCurrent(), listUserDto.getSize()), queryWrapper);
-        List<UserVo> list = page.getRecords().stream().map(user -> user.buildVo(new UserVo())).collect(Collectors.toList());
+        //查询条件
+        Specification<User> spec = UserSpecification.combine(
+                UserSpecification.withUsername(listUserDto.getUsername()),
+                UserSpecification.withNickname(listUserDto.getNickname()),
+                UserSpecification.withStatus(listUserDto.getStatus())
+        );
+        //查询
+        Page<User> page = findAll(listUserDto.getPage(), listUserDto.getSize(), listUserDto.getSort(), spec);
+        //列表处理
+        List<UserVo> list = UserMapper.INSTANCE.userListToVo(page.getContent());
+        //List<UserVo> list = page.getContent().stream().map(UserMapper.INSTANCE::userToVo).collect(Collectors.toList());
         //封装返回体
-        PageVo<UserVo> pageVo = new PageVo<>();
-        BeanUtils.copyProperties(page, pageVo);
-        pageVo.setRecords(list);
-
-        return pageVo;
+        return new PageVo<>((int) page.getTotalElements(), page.getNumber() + 1, page.getSize(), list);
     }
 
     @Override
@@ -67,10 +86,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         try {
             authenticate = authenticationManager.authenticate(token);
         } catch (AuthenticationException e) {
-            throw new CustomException(ResultEnum.GET_ERROR);
+            throw new CustomException(ResultEnums.GET_ERROR);
         }
 
-        return (User) authenticate.getPrincipal();
-
+        User user = (User) authenticate.getPrincipal();
+        if (!SecurityUtils.matchesPassword(loginDto.getPassword(), user.getPassword())) {
+            throw new CustomException(0, "密码错误");
+        }
+        return user;
     }
 }

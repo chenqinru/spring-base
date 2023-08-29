@@ -1,93 +1,68 @@
 package com.eztech.springbase.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import org.springframework.beans.BeanUtils;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
- * 操作日志
+ * 日志实体
  *
  * @author chenqinru
  * @date 2023/07/02
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
-public class Log implements Serializable {
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键
-     */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+@DynamicInsert
+@DynamicUpdate
+@Entity
+@Table(name = "ez_log")
+public class Log extends BaseEntity {
 
     /**
      * 日志类型
      */
+    @Column
     private String type;
 
     /**
      * 账号
      */
+    @Column
     private String username;
 
     /**
      * 昵称
      */
+    @Column
     private String nickname;
 
     /**
      * 路径
      */
+    @Column
     private String path;
 
     /**
      * 请求方式
      */
+    @Column
     private String method;
 
     /**
      * 信息
      */
+    @Column
     private String msg;
 
     /**
      * IP地址
      */
+    @Column
     private String ip;
-
-    /**
-     * 创建时间
-     */
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createTime;
-
-    /**
-     * 修改时间 -- 修改时自动更新
-     */
-    @JsonProperty("update_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
-
-    /**
-     * 构造VO
-     *
-     * @return VO对象
-     */
-    public <T> T buildVo(T object) {
-        BeanUtils.copyProperties(this, object);
-        return object;
-    }
 
 }

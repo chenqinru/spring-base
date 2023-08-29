@@ -1,77 +1,78 @@
 package com.eztech.springbase.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import org.springframework.beans.BeanUtils;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 角色
+ * 角色实体
  *
  * @author chenqinru
  * @date 2023/07/10
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
-public class Role implements Serializable {
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键
-     */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+@DynamicInsert
+@DynamicUpdate
+@Entity
+@Table(name = "ez_role")
+@ToString(exclude = {"permissions", "users"})
+public class Role extends BaseEntity implements GrantedAuthority {
 
     /**
      * 代码
      */
+    @Column
     private String code;
 
     /**
      * 名称
      */
+    @Column
     private String name;
 
     /**
-     * 排序
+     * 权重
      */
-    private Integer sort;
+    @Column
+    private Integer weight;
 
     /**
      * 备注
      */
+    @Column
     private String remark;
 
     /**
-     * 创建时间
+     * 关联用户
      */
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createTime;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
 
     /**
-     * 修改时间 -- 修改时自动更新
+     * 关联权限
      */
-    @JsonProperty("update_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @BatchSize(size = 100)
+    @JoinTable(
+            name = "ez_role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private List<Permission> permissions = new ArrayList<>();
 
-    /**
-     * 构造VO
-     *
-     * @return VO对象
-     */
-    public <T> T buildVo(T object) {
-        BeanUtils.copyProperties(this, object);
-        return object;
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + code;
     }
 }

@@ -8,11 +8,15 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+
 /**
- * @author CQR
+ * 日志详情
+ *
+ * @author chenqinru
+ * @date 2023/07/22
  */
 @Data
-@ApiModel("日志")
+@ApiModel("日志详情")
 public class LogVo {
 
     /**

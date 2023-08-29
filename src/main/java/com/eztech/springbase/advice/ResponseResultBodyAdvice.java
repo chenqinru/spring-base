@@ -1,9 +1,9 @@
 package com.eztech.springbase.advice;
 
 import com.eztech.springbase.annotation.NotControllerResponseAdvice;
-import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.utils.ResultVoUtil;
+import com.eztech.springbase.utils.ResultVoUtils;
 import com.eztech.springbase.vo.ResultVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 /**
  * API接口统一JSON格式返回
  *
- * @author CQR
+ * @author chenqinru
  */
 @RestControllerAdvice
 public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -78,12 +78,12 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 // 将数据包装在Result里后，再转换为json字符串响应给前端
-                return objectMapper.writeValueAsString(ResultVoUtil.ok(body));
+                return objectMapper.writeValueAsString(ResultVoUtils.ok(body));
             } catch (JsonProcessingException e) {
-                throw new CustomException(ResultEnum.FAIL);
+                throw new CustomException(ResultEnums.FAIL);
             }
         }
 
-        return ResultVoUtil.ok(body);
+        return ResultVoUtils.ok(body);
     }
 }

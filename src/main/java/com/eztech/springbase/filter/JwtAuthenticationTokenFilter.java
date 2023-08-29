@@ -1,9 +1,10 @@
 package com.eztech.springbase.filter;
 
 import com.eztech.springbase.config.SecurityIgnoreUrl;
-import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.utils.JwtUtil;
+import com.eztech.springbase.utils.JwtContextUtils;
+import com.eztech.springbase.utils.JwtUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,7 +41,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private SecurityIgnoreUrl securityIgnoreUrl;
 
     @Override
-    //@Transactional
     public void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(AUTHORIZATION);
         Stream<RequestMatcher> matchers = Arrays.stream(securityIgnoreUrl.getUrls()).map(AntPathRequestMatcher::new);
@@ -50,22 +50,23 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         if (token == null) {
-            throw new CustomException(ResultEnum.TOKEN_EMPTY);
+            throw new CustomException(ResultEnums.TOKEN_EMPTY);
         }
 
-        if (!JwtUtil.verify(token)) {
-            throw new CustomException(ResultEnum.TOKEN_INVALID);
+        if (!JwtUtils.verify(token)) {
+            throw new CustomException(ResultEnums.TOKEN_INVALID);
         }
 
-        if (JwtUtil.isExpired(token)) {
-            throw new CustomException(ResultEnum.TOKEN_EXPIRED);
+        if (JwtUtils.isExpired(token)) {
+            throw new CustomException(ResultEnums.TOKEN_EXPIRED);
         }
 
-        String username = JwtUtil.getUsername(token);
+        String username = JwtUtils.getUsername(token);
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         filterChain.doFilter(request, response);
+        JwtContextUtils.clear();
     }
 }

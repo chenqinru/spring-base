@@ -1,27 +1,38 @@
 package com.eztech.springbase.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.eztech.springbase.dto.user.ListUserDto;
+import com.eztech.springbase.dto.user.SaveUserDto;
+import com.eztech.springbase.entity.Role;
 import com.eztech.springbase.entity.User;
-import org.apache.ibatis.annotations.*;
+import com.eztech.springbase.vo.user.UserVo;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 /**
- * @author CQR
+ * 用户映射器
+ *
+ * @author chenqinru
+ * @date 2023/07/22
  */
-@Mapper
-public interface UserMapper extends BaseMapper<User> {
-    @Select("select * from user where id=#{id}")
-    User selectById(Integer id);
+@Mapper(uses = {RoleMapper.class})
+public interface UserMapper {
 
-    @Select("select * from user")
-    @Results({
-            @Result(column = "id", property = "id"),
-            @Result(column = "name", property = "name"),
-            @Result(column = "password", property = "password"),
-            @Result(column = "id", property = "roles", javaType = List.class,
-                    many = @Many(select = "com.eztech.springbase.mapper.RoleMapper.selectByUid")
-            )
-    })
-    List<User> selectAllUserAndRoles();
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    UserVo userToVo(User user);
+
+    List<UserVo> userListToVo(List<User> users);
+
+    User listUserDtoToUser(ListUserDto listUserDto);
+
+    //@Mapping(target = "roles", ignore = true)
+    //@Mapping(source = "saveUserDto.roles", target = "roles.id")
+    @Mapping(target = "roles", source = "roles")
+    User saveUserDtoToUser(SaveUserDto saveUserDto);
+
+    @Mapping(target = "id", source = "roleId")
+    Role roleIdToRole(Integer roleId);
 }

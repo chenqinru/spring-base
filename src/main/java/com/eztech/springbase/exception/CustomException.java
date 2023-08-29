@@ -1,12 +1,12 @@
 package com.eztech.springbase.exception;
 
 
-import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.enums.ResultEnums;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author CQR
+ * @author chenqinru
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -20,11 +20,11 @@ public class CustomException extends RuntimeException {
     /**
      * 自定义异常
      *
-     * @param resultEnum 返回枚举对象
+     * @param resultEnums 返回枚举对象
      */
-    public CustomException(ResultEnum resultEnum) {
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
+    public CustomException(ResultEnums resultEnums) {
+        super(resultEnums.getMsg());
+        this.code = resultEnums.getCode();
     }
 
     /**

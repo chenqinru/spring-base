@@ -44,29 +44,36 @@ spring:
         slf4j:
           enabled: true
           statement-executable-sql-log-enable: true
-  # 配置Redis
+  #jpa配置
+  jpa:
+    #打印日志
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+#        hibernate:
+#          format_sql: true
+#    hibernate:
+#      ddl-auto: update
+  # redis 配置
   redis:
-    jedis:
+    # 连接超时时间
+    timeout: 10s
+    #自 Spring Boot 2.2 版本起，Lettuce 取代了之前的默认客户端 Jedis，成为 Spring Boot 中与 Redis 进行交互的首选客户端。
+    lettuce:
       pool:
-        max-active: 8
-        max-wait: -1ms
-        max-idle: 8
+        # 连接池中的最小空闲连接
         min-idle: 0
-
-# mybatis_plus
-mybatis-plus:
-#  configuration:
-    # MyBatisPlus 驼峰命名
-#    map-underscore-to-camel-case: true
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #sql日志的打印
-  mapper-locations: classpath:mapping/*Mapper.xml # xml路径
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
 
 #日志配置
 logging:
   config: classpath:logback-spring.xml #使用logback进行配置
-#  level:
-#    com.eztech.springbase:
-#      mapper: debug # mapper debug模式日志输出，此配置和mybatis-plus.configuration.log-impl配置一个即可
 
 # knife4j
 knife4j:
@@ -76,7 +83,6 @@ knife4j:
 security:
   ignore:
     urls:
-      - /user/create
       - /user/login
       - /swagger-ui.html
       - /swagger-resources/**

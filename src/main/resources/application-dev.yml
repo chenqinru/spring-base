@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://localhost:3306/java_demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
     username: root
     password: root
-  ### 配置Redis
+  # 配置Redis
   redis:
     database: 0
     host: localhost

@@ -1,14 +1,12 @@
 package com.eztech.springbase.dto.log;
 
 import com.eztech.springbase.dto.BaseDto;
-import com.eztech.springbase.entity.User;
-import com.eztech.springbase.validation.UpdateGroup;
+import com.eztech.springbase.validator.group.UpdateGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -18,12 +16,12 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 /**
- * @author CQR
+ * @author chenqinru
  */
 @Data
 @ApiModel("写入的日志数据")
 @EqualsAndHashCode(callSuper = false)
-public class SaveLogDto extends BaseDto<User> {
+public class SaveLogDto extends BaseDto {
 
     @ApiModelProperty(value = "id" , required = true)
     @NotNull(message = "id不能为空" , groups = {UpdateGroup.class})
@@ -60,16 +58,4 @@ public class SaveLogDto extends BaseDto<User> {
     @Past(message = "生日时间必须小于当前时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
-
-    /**
-     * 构造实体
-     *
-     * @return 实体对象
-     */
-    @Override
-    public User buildEntity() {
-        User user = new User();
-        BeanUtils.copyProperties(this, user);
-        return user;
-    }
 }

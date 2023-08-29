@@ -1,15 +1,17 @@
 package com.eztech.springbase.advice;
 
-import com.eztech.springbase.enums.LogTypeEnum;
-import com.eztech.springbase.enums.ResultEnum;
+import com.eztech.springbase.enums.LogTypeEnums;
+import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
-import com.eztech.springbase.service.ILogService;
-import com.eztech.springbase.utils.ExceptionUtil;
-import com.eztech.springbase.utils.ResultVoUtil;
+import com.eztech.springbase.service.LogService;
+import com.eztech.springbase.utils.ExceptionUtils;
+import com.eztech.springbase.utils.ResultVoUtils;
 import com.eztech.springbase.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -21,41 +23,42 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 
 /**
- * @author CQR
+ * @author chenqinru
  */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @Resource
-    private ILogService logService;
+    private LogService logService;
 
     /**
      * 自定义异常
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(CustomException.class)
-    public ResultVo<?> processException(CustomException e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        return ResultVoUtil.fail(Objects.requireNonNull(ResultEnum.getByCode(e.getCode())));
+    public ResultVo<Object> processException(CustomException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        return ResultVoUtils.fail(e.getLocalizedMessage());
     }
 
     /**
      * 拦截表单参数校验
      */
     @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(BindException.class)
-    public ResultVo<?> bindException(BindException e) {
+    @ExceptionHandler({ConstraintViolationException.class, BindException.class})
+    public ResultVo<Object> bindException(BindException e) {
         BindingResult bindingResult = e.getBindingResult();
         //Log add = logService.add(LogTypeEnum.INFO, JSON.toJSONString(bindingResult.getTarget()));
         //log.info("请求日志:{}", add);
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        return ResultVoUtils.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
 
     /**
@@ -63,13 +66,13 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultVo<?> bindException(MethodArgumentNotValidException e) {
+    public ResultVo<Object> bindException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
         //Log add = logService.add(LogTypeEnum.INFO, JSON.toJSONString(bindingResult.getTarget()));
         //log.info("请求日志:{}", add);
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        return ResultVoUtil.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        return ResultVoUtils.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
 
     /**
@@ -77,10 +80,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResultVo<?> missingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        return ResultVoUtil.fail(ResultEnum.ARGUMENT_TYPE_MISMATCH);
+    public ResultVo<Object> missingServletRequestParameterException(MissingServletRequestParameterException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        return ResultVoUtils.fail(ResultEnums.ARGUMENT_TYPE_MISMATCH);
     }
 
     /**
@@ -88,10 +91,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResultVo<?> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        return ResultVoUtil.fail(ResultEnum.ARGUMENT_TYPE_MISMATCH);
+    public ResultVo<Object> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        return ResultVoUtils.fail(ResultEnums.ARGUMENT_TYPE_MISMATCH);
     }
 
     /**
@@ -99,10 +102,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResultVo<?> httpMessageNotReadable(HttpMessageNotReadableException e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        return ResultVoUtil.fail(ResultEnum.FORMAT_ERROR);
+    public ResultVo<Object> httpMessageNotReadable(HttpMessageNotReadableException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        return ResultVoUtils.fail(ResultEnums.FORMAT_ERROR);
     }
 
     /**
@@ -110,10 +113,37 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResultVo<?> httpReqMethodNotSupported(HttpRequestMethodNotSupportedException e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage());
-        return ResultVoUtil.fail(ResultEnum.REQ_METHOD_NOT_SUPPORT);
+    public ResultVo<Object> httpReqMethodNotSupported(HttpRequestMethodNotSupportedException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage());
+        return ResultVoUtils.fail(ResultEnums.REQ_METHOD_NOT_SUPPORT);
+    }
+
+    /**
+     * 实体查找失败
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResultVo<Object> exception(EmptyResultDataAccessException e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage().trim());
+        e.printStackTrace();
+        return ResultVoUtils.fail(ResultEnums.GET_ERROR);
+    }
+
+    /**
+     * 403权限不足
+     *
+     * @param e e
+     * @return {@link ResultVo}<{@link ?}>
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResultVo<Object> accessDeniedException(AccessDeniedException e) {
+        String msg = ResultEnums.ACCESS_DENIED.getMsg();
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), msg);
+        logService.add(LogTypeEnums.ERROR, msg);
+        return ResultVoUtils.fail(ResultEnums.ACCESS_DENIED);
     }
 
     /**
@@ -121,10 +151,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
-    public ResultVo<?> exception(Exception e) {
-        log.error("位置:{} -> 错误信息:{}", ExceptionUtil.getLineInfo(e), e.getLocalizedMessage());
-        logService.add(LogTypeEnum.ERROR, e.getLocalizedMessage().trim());
+    public ResultVo<Object> exception(Exception e) {
+        log.error("位置:{} -> 错误信息:{}", ExceptionUtils.getLineInfo(e), e.getLocalizedMessage());
+        logService.add(LogTypeEnums.ERROR, e.getLocalizedMessage().trim());
         e.printStackTrace();
-        return ResultVoUtil.fail(e.getLocalizedMessage());
+        return ResultVoUtils.fail(e.getLocalizedMessage());
     }
 }
