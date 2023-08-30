@@ -1,6 +1,5 @@
 package com.eztech.springbase.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -19,11 +18,7 @@ import java.time.LocalDateTime;
 @DynamicInsert
 @DynamicUpdate
 @MappedSuperclass
-//@ToString
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BaseEntity {
-
-    //private static final long serialVersionUID = 1L;
 
     /**
      * 主键
