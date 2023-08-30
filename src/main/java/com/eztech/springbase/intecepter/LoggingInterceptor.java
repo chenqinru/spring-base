@@ -9,8 +9,8 @@ import com.eztech.springbase.utils.RequestUtils;
 import com.eztech.springbase.utils.ResponseUtils;
 import com.eztech.springbase.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.MDC;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -37,7 +37,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
     private LogServiceImpl logService;
 
     @Override
-    public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
+    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
         if (!isController(handler)) {
             return true;
         }
@@ -51,7 +51,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler, Exception ex) {
+    public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) {
         if (isController(handler)) {
             long responseTime = System.currentTimeMillis() - TIMER.get();
             String responseBody = ResponseUtils.getBodyAsString(response);

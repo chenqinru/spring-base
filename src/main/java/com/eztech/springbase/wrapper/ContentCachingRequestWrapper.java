@@ -1,6 +1,6 @@
 package com.eztech.springbase.wrapper;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 import org.springframework.util.StreamUtils;
 
 import javax.servlet.ReadListener;

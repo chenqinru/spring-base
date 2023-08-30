@@ -7,13 +7,13 @@ import com.eztech.springbase.utils.ResultVoUtils;
 import com.eztech.springbase.vo.ResultVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -42,7 +42,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
      * 判断Controller方法返回值是否支持
      */
     @Override
-    public boolean supports(MethodParameter returnType, @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
         // 如果接口返回的类型本身就是Result那就没有必要进行额外的操作，返回false
         if (returnType.getGenericParameterType().equals(ResultVo.class)) {
             return false;
@@ -60,11 +60,11 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
      */
     @Override
     public Object beforeBodyWrite(Object body,
-                                  @NotNull MethodParameter returnType,
-                                  @NotNull MediaType selectedContentType,
-                                  @NotNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                  @NotNull ServerHttpRequest request,
-                                  @NotNull ServerHttpResponse response) {
+                                  @NonNull MethodParameter returnType,
+                                  @NonNull MediaType selectedContentType,
+                                  @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                  @NonNull ServerHttpRequest request,
+                                  @NonNull ServerHttpResponse response) {
         // 防止重复包裹的问题出现
         if (body instanceof ResultVo) {
             return body;

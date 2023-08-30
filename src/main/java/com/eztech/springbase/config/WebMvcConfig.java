@@ -2,8 +2,8 @@ package com.eztech.springbase.config;
 
 import com.eztech.springbase.intecepter.AuthorizeInterceptor;
 import com.eztech.springbase.intecepter.LoggingInterceptor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -29,7 +29,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * @param registry 注册表
      */
     @Override
-    public void addInterceptors(@NotNull InterceptorRegistry registry) {
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
         registry.addInterceptor(authorizeInterceptor).addPathPatterns("/**");
         registry.addInterceptor(loggingInterceptor).addPathPatterns("/**");
     }

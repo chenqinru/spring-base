@@ -1,6 +1,6 @@
 package com.eztech.springbase.wrapper;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.Nullable;
 import org.springframework.util.FastByteArrayOutputStream;

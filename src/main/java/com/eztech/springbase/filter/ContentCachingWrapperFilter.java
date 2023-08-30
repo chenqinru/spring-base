@@ -2,7 +2,7 @@ package com.eztech.springbase.filter;
 
 import com.eztech.springbase.wrapper.ContentCachingRequestWrapper;
 import com.eztech.springbase.wrapper.ContentCachingResponseWrapper;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -21,7 +21,7 @@ import java.io.IOException;
 @Component
 public class ContentCachingWrapperFilter extends OncePerRequestFilter {
     @Override
-    protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         // 使用 重写 HttpServletRequestWrapper 的自定义包装类
         if (!(request instanceof ContentCachingRequestWrapper)) {
             request = new ContentCachingRequestWrapper(request);

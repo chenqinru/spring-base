@@ -1,6 +1,6 @@
 package com.eztech.springbase.filter;
 
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -25,7 +25,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver resolver;
 
     @Override
-    protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) {
         try {
             filterChain.doFilter(request, response);
         } catch (Exception e) {

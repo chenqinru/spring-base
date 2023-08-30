@@ -84,6 +84,12 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!-- 引入freeMarker模板引擎 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
         <!-- json序列化 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

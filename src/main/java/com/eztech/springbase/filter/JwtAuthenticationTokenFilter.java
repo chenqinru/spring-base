@@ -5,7 +5,7 @@ import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.utils.JwtContextUtils;
 import com.eztech.springbase.utils.JwtUtils;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,7 +41,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private SecurityIgnoreUrl securityIgnoreUrl;
 
     @Override
-    public void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
+    public void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(AUTHORIZATION);
         Stream<RequestMatcher> matchers = Arrays.stream(securityIgnoreUrl.getUrls()).map(AntPathRequestMatcher::new);
         if (matchers.anyMatch(matcher -> matcher.matches(request))) {
