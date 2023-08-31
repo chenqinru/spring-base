@@ -39,5 +39,7 @@
 
 ## 其他
 1. knife4j的增强注解@ApiOperationSupport(ignoreParameters = {"id"})忽略字段，存在会忽略其他字段的BUG，官方建议使用includeParameters属性或者新增一个类区分开。
+2. flyway中的前缀：V 表示版本化迁移，U 表示撤销迁移，R 表示可重复迁移
+3. flyway.baseline-version：第一次运行时会执行所有脚本，当删除flyway_schema_history表后，会跳过20230831006和之前的脚本
 
 

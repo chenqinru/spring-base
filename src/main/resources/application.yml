@@ -44,6 +44,14 @@ spring:
         slf4j:
           enabled: true
           statement-executable-sql-log-enable: true
+  ## 数据库版本管理
+  flyway:
+    # 是否启用，默认为true
+    enabled: true
+    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
+    # 第一次运行时会执行所有脚本，当删除flyway_schema_history表后，会跳过20230831006和之前的脚本
+    baseline-version: 20230831006
   #jpa配置
   jpa:
     #打印日志
@@ -51,10 +59,6 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
-#        hibernate:
-#          format_sql: true
-#    hibernate:
-#      ddl-auto: update
   # redis 配置
   redis:
     # 连接超时时间
