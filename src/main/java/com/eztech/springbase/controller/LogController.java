@@ -1,5 +1,7 @@
 package com.eztech.springbase.controller;
 
+import com.eztech.springbase.annotation.Authorize;
+import com.eztech.springbase.annotation.GuavaRateLimiter;
 import com.eztech.springbase.dto.log.ListLogDto;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.mapper.LogMapper;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-
 
 /**
  * 日志控制器
@@ -37,6 +38,8 @@ public class LogController {
      */
     @GetMapping("/list")
     @ApiOperation("日志列表")
+    @Authorize("admin:log:list")
+    @GuavaRateLimiter
     public PageVo<LogVo> list(@Validated ListLogDto listLogDto) {
         return logService.list(listLogDto);
     }
@@ -50,6 +53,8 @@ public class LogController {
      */
     @GetMapping("/{id}")
     @ApiOperation("日志详情")
+    @Authorize("admin:log:read")
+    @GuavaRateLimiter
     public LogVo read(@PathVariable Integer id) throws CustomException {
         return LogMapper.INSTANCE.logToVo(logService.findById(id));
     }
@@ -61,6 +66,8 @@ public class LogController {
      */
     @DeleteMapping("/delete")
     @ApiOperation("单个或批量删除用户")
+    @Authorize("admin:log:delete")
+    @GuavaRateLimiter
     public void delete(@RequestBody List<Integer> ids) {
         logService.deleteAllById(ids);
     }

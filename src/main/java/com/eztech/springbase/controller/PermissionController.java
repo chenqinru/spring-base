@@ -1,12 +1,12 @@
 package com.eztech.springbase.controller;
 
+import com.eztech.springbase.annotation.Authorize;
+import com.eztech.springbase.annotation.GuavaRateLimiter;
 import com.eztech.springbase.dto.permission.ListPermissionDto;
 import com.eztech.springbase.dto.permission.SavePermissionDto;
-import com.eztech.springbase.entity.Route;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.mapper.PermissionMapper;
 import com.eztech.springbase.service.PermissionService;
-import com.eztech.springbase.service.impl.RouteService;
 import com.eztech.springbase.validator.group.CreateGroup;
 import com.eztech.springbase.validator.group.UpdateGroup;
 import com.eztech.springbase.vo.PageVo;
@@ -34,9 +34,6 @@ public class PermissionController {
     @Resource
     private PermissionService permissionService;
 
-    @Resource
-    private RouteService routeService;
-
     /**
      * 权限列表
      *
@@ -45,6 +42,8 @@ public class PermissionController {
      */
     @GetMapping("/list")
     @ApiOperation("权限列表")
+    @Authorize("admin:permission:list")
+    @GuavaRateLimiter
     public PageVo<PermissionVo> list(@Validated ListPermissionDto listPermissionDto) {
         return permissionService.list(listPermissionDto);
     }
@@ -57,6 +56,8 @@ public class PermissionController {
     @PostMapping("/create")
     @ApiOperation("创建权限")
     @ApiOperationSupport(ignoreParameters = {"id"})
+    @Authorize("admin:permission:create")
+    @GuavaRateLimiter
     public void create(@Validated({CreateGroup.class}) @RequestBody SavePermissionDto savePermissionDto) {
         permissionService.save(PermissionMapper.INSTANCE.savePermissionDtoToPermission(savePermissionDto));
     }
@@ -70,6 +71,8 @@ public class PermissionController {
      */
     @GetMapping("/{id}")
     @ApiOperation("权限详情")
+    @Authorize("admin:permission:read")
+    @GuavaRateLimiter
     public PermissionVo read(@PathVariable Integer id) throws CustomException {
         return PermissionMapper.INSTANCE.permissionToVo(permissionService.findById(id));
     }
@@ -81,6 +84,8 @@ public class PermissionController {
      */
     @PutMapping("/update")
     @ApiOperation("更新权限")
+    @Authorize("admin:permission:update")
+    @GuavaRateLimiter
     public void update(@Validated({UpdateGroup.class}) @RequestBody SavePermissionDto savePermissionDto) {
         permissionService.updateAllById(PermissionMapper.INSTANCE.savePermissionDtoToPermission(savePermissionDto));
     }
@@ -92,18 +97,9 @@ public class PermissionController {
      */
     @DeleteMapping("/delete")
     @ApiOperation("单个或批量删除权限")
+    @Authorize("admin:permission:delete")
+    @GuavaRateLimiter
     public void delete(@RequestBody List<Integer> ids) {
         permissionService.deleteAllById(ids);
-    }
-
-    /**
-     * 获取所有路由映射关系
-     *
-     * @return {@link List}<{@link Route}>
-     */
-    @GetMapping("/route")
-    @ApiOperation("获取所有路由映射关系")
-    public List<Route> route() {
-        return routeService.getAllRouteMapping();
     }
 }

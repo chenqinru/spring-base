@@ -1,6 +1,6 @@
 package com.eztech.springbase.advice;
 
-import com.eztech.springbase.annotation.NotControllerResponseAdvice;
+import com.eztech.springbase.annotation.ResponseNotWrap;
 import com.eztech.springbase.enums.ResultEnums;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.utils.ResultVoUtils;
@@ -47,8 +47,8 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
         if (returnType.getGenericParameterType().equals(ResultVo.class)) {
             return false;
         }
-        // 如果使用了NotControllerResponseAdvice注解，返回false
-        if (returnType.hasMethodAnnotation(NotControllerResponseAdvice.class)){
+        // 如果使用了ResponseNotWrap注解，返回false
+        if (returnType.hasMethodAnnotation(ResponseNotWrap.class)){
             return false;
         }
         // 对类或者方法上面注解了@RestController 或者 @ResponseBody 的方法统一处理

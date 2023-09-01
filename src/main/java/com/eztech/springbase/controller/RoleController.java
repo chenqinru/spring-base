@@ -1,9 +1,9 @@
 package com.eztech.springbase.controller;
 
+import com.eztech.springbase.annotation.Authorize;
 import com.eztech.springbase.annotation.GuavaRateLimiter;
 import com.eztech.springbase.dto.role.ListRoleDto;
 import com.eztech.springbase.dto.role.SaveRoleDto;
-import com.eztech.springbase.entity.Role;
 import com.eztech.springbase.exception.CustomException;
 import com.eztech.springbase.mapper.RoleMapper;
 import com.eztech.springbase.service.RoleService;
@@ -14,12 +14,10 @@ import com.eztech.springbase.vo.role.RoleVo;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -45,6 +43,7 @@ public class RoleController {
      */
     @GetMapping("/list")
     @ApiOperation("角色列表")
+    @Authorize("admin:role:list")
     @GuavaRateLimiter
     public PageVo<RoleVo> list(@Validated ListRoleDto listRoleDto) {
         return roleService.list(listRoleDto);
@@ -58,10 +57,11 @@ public class RoleController {
     @PostMapping("/create")
     @ApiOperation("创建角色")
     @ApiOperationSupport(ignoreParameters = {"id"})
+    @Authorize("admin:role:create")
+    @GuavaRateLimiter
     public void create(@Validated({CreateGroup.class}) @RequestBody SaveRoleDto saveRoleDto) {
         roleService.save(RoleMapper.INSTANCE.saveRoleDtoToRole(saveRoleDto));
     }
-
 
     /**
      * 角色详情
@@ -72,10 +72,11 @@ public class RoleController {
      */
     @GetMapping("/{id}")
     @ApiOperation("角色详情")
+    @Authorize("admin:role:read")
+    @GuavaRateLimiter
     public RoleVo read(@PathVariable Integer id) throws CustomException {
         return RoleMapper.INSTANCE.roleToVo(roleService.findById(id));
     }
-
 
     /**
      * 更新角色
@@ -84,10 +85,11 @@ public class RoleController {
      */
     @PutMapping("/update")
     @ApiOperation("更新角色")
+    @Authorize("admin:role:update")
+    @GuavaRateLimiter
     public void update(@Validated({UpdateGroup.class}) @RequestBody SaveRoleDto saveRoleDto) {
         roleService.updateAllById(RoleMapper.INSTANCE.saveRoleDtoToRole(saveRoleDto));
     }
-
 
     /**
      * 单个或批量删除
@@ -96,14 +98,9 @@ public class RoleController {
      */
     @DeleteMapping("/delete")
     @ApiOperation("单个或批量删除角色")
+    @Authorize("admin:role:delete")
+    @GuavaRateLimiter
     public void delete(@RequestBody List<Integer> ids) {
         roleService.deleteAllById(ids);
-    }
-
-    @GetMapping("/test")
-    @ApiOperation("测试")
-    @Transactional
-    public Page<Role> test() {
-        return roleService.test();
     }
 }
