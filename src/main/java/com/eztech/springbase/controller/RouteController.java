@@ -1,7 +1,7 @@
 package com.eztech.springbase.controller;
 
 import com.eztech.springbase.annotation.Authorize;
-import com.eztech.springbase.annotation.GuavaRateLimiter;
+import com.eztech.springbase.annotation.RateLimiter;
 import com.eztech.springbase.entity.RouteNode;
 import com.eztech.springbase.service.impl.RouteService;
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class RouteController {
     @GetMapping("/list")
     @ApiOperation("路由列表")
     @Authorize("admin:route:read")
-    @GuavaRateLimiter
+    @RateLimiter
     public List<RouteNode> list() {
         return routeService.list();
     }

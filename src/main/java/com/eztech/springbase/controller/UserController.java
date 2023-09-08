@@ -1,7 +1,7 @@
 package com.eztech.springbase.controller;
 
 import com.eztech.springbase.annotation.Authorize;
-import com.eztech.springbase.annotation.GuavaRateLimiter;
+import com.eztech.springbase.annotation.RateLimiter;
 import com.eztech.springbase.dto.user.ListUserDto;
 import com.eztech.springbase.dto.user.LoginDto;
 import com.eztech.springbase.dto.user.SaveUserDto;
@@ -46,7 +46,7 @@ public class UserController {
     @GetMapping("/list")
     @ApiOperation("用户列表")
     @Authorize("admin:user:list")
-    @GuavaRateLimiter
+    @RateLimiter
     public PageVo<UserVo> list(@Validated ListUserDto listUserDto) {
         return userService.list(listUserDto);
     }
@@ -60,7 +60,7 @@ public class UserController {
     @ApiOperation("创建用户")
     @ApiOperationSupport(ignoreParameters = {"id"})
     @Authorize("admin:user:create")
-    @GuavaRateLimiter
+    @RateLimiter
     public void create(@Validated({CreateGroup.class}) @RequestBody SaveUserDto saveUserDto) {
         userService.save(UserMapper.INSTANCE.saveUserDtoToUser(saveUserDto));
     }
@@ -75,7 +75,7 @@ public class UserController {
     @GetMapping("/{id}")
     @ApiOperation("用户详情")
     @Authorize("admin:user:read")
-    @GuavaRateLimiter
+    @RateLimiter
     public UserVo read(@PathVariable Integer id) throws CustomException {
         return UserMapper.INSTANCE.userToVo(userService.findById(id));
     }
@@ -88,7 +88,7 @@ public class UserController {
     @PutMapping("/update")
     @ApiOperation("更新用户")
     @Authorize("admin:user:update")
-    @GuavaRateLimiter
+    @RateLimiter
     public void update(@Validated({UpdateGroup.class}) @RequestBody SaveUserDto saveUserDto) {
         userService.updateAllById(UserMapper.INSTANCE.saveUserDtoToUser(saveUserDto));
     }
@@ -101,7 +101,7 @@ public class UserController {
     @DeleteMapping("/delete")
     @ApiOperation("单个或批量删除用户")
     @Authorize("admin:user:delete")
-    @GuavaRateLimiter
+    @RateLimiter
     public void delete(@RequestBody List<Integer> ids) {
         userService.deleteAllById(ids);
     }

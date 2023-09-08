@@ -1,7 +1,7 @@
 package com.eztech.springbase.controller;
 
 import com.eztech.springbase.annotation.Authorize;
-import com.eztech.springbase.annotation.GuavaRateLimiter;
+import com.eztech.springbase.annotation.RateLimiter;
 import com.eztech.springbase.dto.role.ListRoleDto;
 import com.eztech.springbase.dto.role.SaveRoleDto;
 import com.eztech.springbase.exception.CustomException;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-
 
 /**
  * 角色控制器
@@ -44,7 +43,7 @@ public class RoleController {
     @GetMapping("/list")
     @ApiOperation("角色列表")
     @Authorize("admin:role:list")
-    @GuavaRateLimiter
+    @RateLimiter
     public PageVo<RoleVo> list(@Validated ListRoleDto listRoleDto) {
         return roleService.list(listRoleDto);
     }
@@ -58,7 +57,7 @@ public class RoleController {
     @ApiOperation("创建角色")
     @ApiOperationSupport(ignoreParameters = {"id"})
     @Authorize("admin:role:create")
-    @GuavaRateLimiter
+    @RateLimiter
     public void create(@Validated({CreateGroup.class}) @RequestBody SaveRoleDto saveRoleDto) {
         roleService.save(RoleMapper.INSTANCE.saveRoleDtoToRole(saveRoleDto));
     }
@@ -73,7 +72,7 @@ public class RoleController {
     @GetMapping("/{id}")
     @ApiOperation("角色详情")
     @Authorize("admin:role:read")
-    @GuavaRateLimiter
+    @RateLimiter
     public RoleVo read(@PathVariable Integer id) throws CustomException {
         return RoleMapper.INSTANCE.roleToVo(roleService.findById(id));
     }
@@ -86,7 +85,7 @@ public class RoleController {
     @PutMapping("/update")
     @ApiOperation("更新角色")
     @Authorize("admin:role:update")
-    @GuavaRateLimiter
+    @RateLimiter
     public void update(@Validated({UpdateGroup.class}) @RequestBody SaveRoleDto saveRoleDto) {
         roleService.updateAllById(RoleMapper.INSTANCE.saveRoleDtoToRole(saveRoleDto));
     }
@@ -99,7 +98,7 @@ public class RoleController {
     @DeleteMapping("/delete")
     @ApiOperation("单个或批量删除角色")
     @Authorize("admin:role:delete")
-    @GuavaRateLimiter
+    @RateLimiter
     public void delete(@RequestBody List<Integer> ids) {
         roleService.deleteAllById(ids);
     }

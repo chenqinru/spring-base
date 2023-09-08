@@ -80,6 +80,11 @@ public enum ResultEnums {
     TOKEN_EXPIRED(203, "token过期"),
 
     /**
+     * 请求太多
+     */
+    TOO_MANY_REQUESTS(300,"访问过于频繁，请稍候再试"),
+
+    /**
      * 访问被拒绝
      */
     ACCESS_DENIED(301, "访问被拒绝"),
