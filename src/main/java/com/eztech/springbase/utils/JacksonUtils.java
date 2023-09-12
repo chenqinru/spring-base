@@ -8,6 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Json 工具类
+ *
+ * @author chenqinru
+ * @date 2023/09/12
+ */
 public class JacksonUtils {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
